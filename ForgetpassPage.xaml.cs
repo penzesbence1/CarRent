@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace CarRent
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for ForgetpassPage.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class ForgetpassPage : Page
     {
-        public LoginPage()
+        public ForgetpassPage()
         {
             InitializeComponent();
-           
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -31,9 +30,9 @@ namespace CarRent
             TextBox textBox = sender as TextBox;
             if (textBox != null && (textBox.Text == "Email" || textBox.Text == "Felhasználónév" || textBox.Text == "Jelszó"))
             {
-                
-                    textBox.Text = ""; // Állítsd át a TextBox szövegét üresre
-                
+
+                textBox.Text = ""; // Állítsd át a TextBox szövegét üresre
+
                 textBox.Opacity = 1.0; // Visszaállítsd az átlátszóságot, ha szükséges
             }
         }
@@ -41,17 +40,18 @@ namespace CarRent
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
-            if (textBox.Text == "" )
+            if (textBox.Text == "")
             {
                 switch (textBox.Name)
                 {
-                    case "textBox1": textBox.Text = "Felhasználónév";
+                    case "textBox1":
+                        textBox.Text = "Felhasználónév";
                         break;
                     case "textBox2":
                         textBox.Text = "Jelszó";
                         break;
                 }
-               
+
                 textBox.Opacity = 0.5;
 
             }
@@ -75,33 +75,5 @@ namespace CarRent
             }
         }
 
-        private void Label_Click(object sender, MouseButtonEventArgs e)
-        {
-            // Hozzáférés a mainFrame elemhez az Application.Current.MainWindow segítségével
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("RegistrationPage.xaml", UriKind.Relative));
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
-            mainWindow.Height = 650;
-            mainWindow.MinWidth = 700;
-            mainWindow.MinHeight = 500;
-            MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
-            mainWindow2.mainFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void MouseClick(object sender, MouseButtonEventArgs e)
-        {
-
-            MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
-            mainWindow2.mainFrame.Navigate(new Uri("ForgetpassPage.xaml", UriKind.Relative));
-        }
     }
 }
