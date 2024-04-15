@@ -10,7 +10,7 @@
     <Grid>
         <Image HorizontalAlignment="Center" Height="100" Margin="0,67,0,0" VerticalAlignment="Top" Width="150" Source="/carrenticon.jpg" Stretch="Fill"/>
         <Label Content="Jelszó visszaállítás" HorizontalAlignment="Center" Margin="0,172,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="25" FontWeight="Bold"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Center" Height="25" Margin="0,230,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="174" Opacity="0.5" FontSize="18" GotFocus="TextBox_GotFocus"  LostFocus="TextBox_LostFocus"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Center" Height="25" Margin="0,230,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="300" Opacity="0.5" FontSize="18" GotFocus="TextBox_GotFocus"  LostFocus="TextBox_LostFocus"/>
         <Button Content="Küldés" HorizontalAlignment="Center" Height="35" Margin="0,300,0,0" VerticalAlignment="Top" Width="150" FontFamily="Segoe UI Semibold" FontWeight="Bold" FontSize="16" Background="#FF01266C" Foreground="#FFE3E3E3" />
 
     </Grid>
