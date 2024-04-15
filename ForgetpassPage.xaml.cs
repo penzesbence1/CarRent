@@ -75,5 +75,14 @@ namespace CarRent
             }
         }
 
+
+
+        private void MouseClick(object sender, MouseButtonEventArgs e)
+        {
+
+            MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
+            mainWindow2.mainFrame.Navigate(new Uri("LoginPage.xaml", UriKind.Relative));
+        }
+
     }
 }
