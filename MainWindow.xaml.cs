@@ -19,7 +19,7 @@ namespace CarRent
         public MainWindow()
         {
             InitializeComponent();
-            mainFrame.Navigate(new Uri("RegistrationPage.xaml", UriKind.Relative));
+            mainFrame.Navigate(new Uri("LoginPage.xaml", UriKind.Relative));
         }
 
 

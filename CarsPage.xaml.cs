@@ -18,11 +18,11 @@ using System.Windows.Shapes;
 namespace CarRent
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for CarsPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class CarsPage : Page
     {
-        public HomePage()
+        public CarsPage()
         {
             InitializeComponent();
         }
@@ -53,8 +53,6 @@ namespace CarRent
 
         private void myLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("CarsPage.xaml", UriKind.Relative));
 
         }
     }
