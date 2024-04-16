@@ -20,4 +20,10 @@
     <Resource Include="image-removebg-preview.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="CarsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

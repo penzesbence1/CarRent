@@ -90,7 +90,7 @@ namespace CarRent
             mainWindow.MinWidth = 700;
             mainWindow.MinHeight = 500;
             MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
-            mainWindow2.mainFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));
+            mainWindow.mainFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
