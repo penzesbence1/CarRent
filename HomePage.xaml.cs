@@ -57,5 +57,26 @@ namespace CarRent
             mainWindow.mainFrame.Navigate(new Uri("CarsPage.xaml", UriKind.Relative));
 
         }
+
+        private void Click(object sender, MouseButtonEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
+
+        }
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
+
+        }
+        private void Autok(object sender, MouseButtonEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.mainFrame.Navigate(new Uri("CarsPage.xaml", UriKind.Relative));
+
+        }
+
+
     }
 }
