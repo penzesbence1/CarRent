@@ -25,9 +25,11 @@
 
         <Grid Background="#FF08568A" Grid.Column="0" MinWidth="100">
 
-            <Image HorizontalAlignment="Center" Height="80" Margin="0,27,0,0" VerticalAlignment="Top" Width="82" Source="/image-removebg-preview.png"/>
-            <Label Content="User" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,110,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-            <Label x:Name="myLabel" Content="Autók" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,160,0,0" VerticalAlignment="Top" Background="#00000000" FontSize="16" Width="200" Height="44" MouseEnter="MyLabel_MouseEnter" MouseLeave="MyLabel_MouseLeave" />
+            <Image HorizontalAlignment="Center" Height="80" Margin="0,27,0,0" VerticalAlignment="Top" Width="82" 
+                   Source="/image-removebg-preview.png"
+                   MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+            <Label Content="User" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,110,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+            <Label x:Name="myLabel" Content="Autók" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,160,0,0" VerticalAlignment="Top" Background="#00000000" FontSize="16" Width="200" Height="44" MouseEnter="MyLabel_MouseEnter" MouseLeave="MyLabel_MouseLeave" MouseLeftButtonUp="Autok"/>
             <Label x:Name="myLabel2" Content="Rendeléseim" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,210,0,0" VerticalAlignment="Top" Background="#00000000" FontSize="16" Width="200" Height="44" MouseEnter="MyLabel_MouseEnter" MouseLeave="MyLabel_MouseLeave"/>
             <Label x:Name="myLabel3" Content="Kijelentkezés" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,260,0,0" VerticalAlignment="Top" Background="#00000000" FontSize="16" Width="200" Height="44" MouseEnter="MyLabel_MouseEnter" MouseLeave="MyLabel_MouseLeave"/>
 
