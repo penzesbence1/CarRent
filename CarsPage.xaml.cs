@@ -25,6 +25,22 @@ namespace CarRent
         public CarsPage()
         {
             InitializeComponent();
+
+
+            var autok = new List<Auto>
+            {
+
+                new Auto { Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 5000000 },
+                new Auto { Marka = "Toyota", Modell = "Corolla", Uzemanyag = "Dizel", Valto = "Manuális", Tipus = "Szabadidőjármű", UlesekSzama = 5, Ar = 3000000 },
+                // Egyéb autók...
+            };
+
+            for (int i = 0; i < 100; i++) {
+                autok.Add(new Auto { Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 5000000 });
+            }
+            myListView.ItemsSource = autok;
+
+
         }
 
         private void MyLabel_MouseEnter(object sender, MouseEventArgs e)
@@ -55,5 +71,19 @@ namespace CarRent
         {
 
         }
+
+
+
+        public class Auto
+        {
+            public string Marka { get; set; }
+            public string Modell { get; set; }
+            public string Uzemanyag { get; set; }
+            public string Valto { get; set; }
+            public string Tipus { get; set; }
+            public int UlesekSzama { get; set; }
+            public decimal Ar { get; set; }
+        }
+
     }
 }
