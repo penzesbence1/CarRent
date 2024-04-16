@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,7 +9,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -18,11 +16,11 @@ using System.Windows.Shapes;
 namespace CarRent
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for UserPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class UserPage : Page
     {
-        public HomePage()
+        public UserPage()
         {
             InitializeComponent();
         }
@@ -37,7 +35,7 @@ namespace CarRent
             }                                                                                     // Sötétebb háttérszín beállítása
 
         }
-       
+
 
         private void MyLabel_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -46,20 +44,8 @@ namespace CarRent
                 System.Windows.Controls.Label label = sender as System.Windows.Controls.Label;
                 label.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF08568A")); // Világosabb árnyalatú szín beállítása
             }
+        }
+        
 
-
-            
-        }
-        private void Image_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            // Kattintáskezelő kód itt
-            MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
-            mainWindow2.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
-        }
-        private void Click(object sender, MouseEventArgs e)
-        {
-            MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
-            mainWindow2.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
-        }
     }
 }
