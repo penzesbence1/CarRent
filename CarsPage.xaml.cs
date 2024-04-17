@@ -32,7 +32,7 @@ namespace CarRent
             {
 
                 new Auto { Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 5000000, Kedvezmeny = "20%" }, 
-                new Auto { Marka = "Toyota", Modell = "Corolla", Uzemanyag = "Dizel", Valto = "Manuális", Tipus = "Szabadidőjármű", UlesekSzama = 5, Ar = 3000000 },
+                new Auto { Marka = "Toyota", Modell = "Corolla", Uzemanyag = "Dizel", Valto = "Manuális", Tipus = "Furgon", UlesekSzama = 5, Ar = 3000000 },
                 // Egyéb autók...
             };
 
@@ -48,16 +48,41 @@ namespace CarRent
                 Markak.Add(item.Marka);
             }
 
-            List<string> SzurtMarkak = new List<string>();
 
-            SzurtMarkak = Markak.Distinct().ToList();
 
-            foreach (var item in SzurtMarkak)
-            {
-                cBMarka.Items.Add(item);
-            }
+            List<string> Szurt1 = new List<string>();
+
+
+            Szurt1 = Markak.Distinct().ToList();
+
+
+            List<string> SzurtModell = new List<string>();
+            List<string> SzurtUzemanyag = new List<string>();
+            List<string> SzurtValto = new List<string>();
+            List<string> SzurtTipus = new List<string>();
+            List<string> SzurtUlesekSzama = new List<string>();
+
+           
+
+            List<List<string>> Szurtek = new List<List<string>>();
 
             
+            Szurtek.Add(Szurt1);
+
+            
+            foreach (var item in Szurtek)
+            {
+                foreach (var item1 in item)
+                {
+                    cBMarka.Items.Add(item1);
+                }
+                
+            }
+
+          
+
+
+
         }
 
         private void MyLabel_MouseEnter(object sender, MouseEventArgs e)
