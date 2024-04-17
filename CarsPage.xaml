@@ -69,10 +69,10 @@
                 <Grid Grid.Row="1">
 
 
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListView d:ItemsSource="{d:SampleData ItemCount=10}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Márka"  DisplayMemberBinding="{Binding Audi}" />
+                                <GridViewColumn Header="Márka"  DisplayMemberBinding="{Binding asd}" />
                                 <GridViewColumn Header="Modell"  DisplayMemberBinding="{Binding TT}" />
                                 <GridViewColumn Header="Üzemanyag"  DisplayMemberBinding="{Binding Benzin}" />
                                 <GridViewColumn Header="Váltó"  DisplayMemberBinding="{Binding Automata}" />
