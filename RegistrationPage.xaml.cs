@@ -88,7 +88,7 @@ namespace CarRent
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
             mainWindow.Height = 650;
-            mainWindow.MinWidth = 700;
+            mainWindow.MinWidth = 800;
             mainWindow.MinHeight = 500;
             MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
             mainWindow2.mainFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));

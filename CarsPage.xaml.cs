@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -30,7 +31,7 @@ namespace CarRent
             var autok = new List<Auto>
             {
 
-                new Auto { Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 5000000 },
+                new Auto { Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 5000000, Kedvezmeny = "20%" }, 
                 new Auto { Marka = "Toyota", Modell = "Corolla", Uzemanyag = "Dizel", Valto = "Manuális", Tipus = "Szabadidőjármű", UlesekSzama = 5, Ar = 3000000 },
                 // Egyéb autók...
             };
@@ -40,7 +41,23 @@ namespace CarRent
             }
             myListView.ItemsSource = autok;
 
+            List<string> Markak = new List<string>();
 
+            foreach (var item in autok)
+            {
+                Markak.Add(item.Marka);
+            }
+
+            List<string> SzurtMarkak = new List<string>();
+
+            SzurtMarkak = Markak.Distinct().ToList();
+
+            foreach (var item in SzurtMarkak)
+            {
+                cBMarka.Items.Add(item);
+            }
+
+            
         }
 
         private void MyLabel_MouseEnter(object sender, MouseEventArgs e)
@@ -101,6 +118,7 @@ namespace CarRent
             public string Tipus { get; set; }
             public int UlesekSzama { get; set; }
             public decimal Ar { get; set; }
+            public string Kedvezmeny { get; set; }
         }
 
     }
