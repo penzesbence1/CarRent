@@ -39,9 +39,9 @@ namespace CarRent
             if (textBox != null && (textBox.Text == "Email" || textBox.Text == "Felhasználónév" || textBox.Text == "Jelszó"))
             {
                 
-                    textBox.Text = ""; // Állítsd át a TextBox szövegét üresre
+                    textBox.Text = ""; 
                 
-                textBox.Opacity = 1.0; // Visszaállítsd az átlátszóságot, ha szükséges
+                textBox.Opacity = 1.0; 
             }
         }
 
@@ -109,5 +109,26 @@ namespace CarRent
             MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
             mainWindow2.mainFrame.Navigate(new Uri("ForgetpassPage.xaml", UriKind.Relative));
         }
+
+
+        private void textBox2_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+            txJelszo.Content = "";
+            textBox2.Opacity = 1;
+
+        }
+
+        private void textBox2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (textBox2.Password == "")
+            {
+                textBox2.Opacity = 0.5;
+                txJelszo.Content = "Jelszó";
+            }
+
+        }
+
+
     }
 }

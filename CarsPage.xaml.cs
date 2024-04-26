@@ -131,8 +131,6 @@ namespace CarRent
 
 
 
-                cbSzurok.Items.Add(this.ToString());
-
                 
             }
         }

@@ -8,13 +8,51 @@
         Title="Login">
 
     <Grid>
-        <Image HorizontalAlignment="Center" Height="100" Margin="0,67,0,0" VerticalAlignment="Top" Width="150" Source="/carrenticon.jpg" Stretch="Fill"/>
-        <Label Content="Bejelentkezés" HorizontalAlignment="Center" Margin="0,172,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="25" FontWeight="Bold"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Center" Height="25" Margin="0,230,0,0" TextWrapping="Wrap" Text="Felhasználónév" VerticalAlignment="Top" Width="300" Opacity="0.5" FontSize="18" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Center" Height="25" Margin="0,280,0,0" TextWrapping="Wrap" Text="Jelszó" VerticalAlignment="Top" Width="300" Opacity="0.5" FontSize="18" GotFocus="TextBox_GotFocus"  LostFocus="TextBox_LostFocus"/>
-        <Button Content="Bejelentkezés" HorizontalAlignment="Center" Height="35" Margin="0,385,0,0" VerticalAlignment="Top" Width="150" FontFamily="Segoe UI Semibold" FontWeight="Bold" FontSize="16" Background="#FF01266C" Foreground="#FFE3E3E3" Click="Button_Click"/>
-        <Label Content="Elfelejtette a jelszót?"  HorizontalAlignment="Center"  Margin="0,425,0,0" VerticalAlignment="Top" FontSize="12" Foreground="#FF0045C6"  MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" MouseLeftButtonUp="MouseClick"/>
-        <Label Content="Még nincs fiókom"  HorizontalAlignment="Center"  Margin="0,450,0,0" VerticalAlignment="Top" FontSize="12" Foreground="#FF0045C6"  MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" MouseLeftButtonUp="Label_Click"/>
+        
+        <Image HorizontalAlignment="Center" Height="100" Margin="0,67,0,0" VerticalAlignment="Top" 
+               Width="150" Source="/carrenticon.jpg" Stretch="Fill"/>
+        
+        
+        <Label Content="Bejelentkezés" HorizontalAlignment="Center" Margin="0,172,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="25" FontWeight="Bold"/>
+        
+        <TextBox x:Name="textBox1" HorizontalAlignment="Center" Height="25" Margin="0,230,0,0" 
+                 TextWrapping="Wrap" Text="Felhasználónév" VerticalAlignment="Top" Width="300" 
+                 Opacity="0.5" FontSize="18" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"
+                 LostFocus="TextBox_LostFocus"/>
+
+
+        <Label x:Name="txJelszo" Content="Jelszó" HorizontalAlignment="Center" 
+                 Height="40" Margin="0,275,0,0"  
+                   VerticalAlignment="Top" Width="300" 
+                 Opacity="1" FontSize="18" GotFocus="TextBox_GotFocus"
+                 LostFocus="TextBox_LostFocus"
+                 />
+
+        
+        <PasswordBox x:Name="textBox2" HorizontalAlignment="Center" Height="25" Margin="0,280,0,0" 
+                 VerticalAlignment="Top" Width="300" Opacity="0.5" 
+                 FontSize="18" GotFocus="textBox2_GotFocus"
+                     LostFocus="textBox2_LostFocus"
+                 PasswordChar="*"
+                 />
+
+        <Label x:Name="lbError"  HorizontalAlignment="Center"  Margin="0,310,0,0" 
+               VerticalAlignment="Top" FontSize="12" Foreground="RED"  
+               />
+        
+        
+        <Button Content="Bejelentkezés" HorizontalAlignment="Center" Height="35" Margin="0,385,0,0" 
+                VerticalAlignment="Top" Width="150" FontFamily="Segoe UI Semibold" FontWeight="Bold"
+                FontSize="16" Background="#FF01266C" Foreground="#FFE3E3E3" Click="Button_Click"/>
+        
+        <Label Content="Elfelejtette a jelszót?"  HorizontalAlignment="Center"  Margin="0,425,0,0" 
+               VerticalAlignment="Top" FontSize="12" Foreground="#FF0045C6"  MouseEnter="Label_MouseEnter"
+               MouseLeave="Label_MouseLeave" MouseLeftButtonUp="MouseClick"/>
+        
+        <Label Content="Még nincs fiókom"  HorizontalAlignment="Center"  Margin="0,450,0,0" 
+               VerticalAlignment="Top" FontSize="12" Foreground="#FF0045C6"  MouseEnter="Label_MouseEnter" 
+               MouseLeave="Label_MouseLeave" MouseLeftButtonUp="Label_Click"/>
 
     </Grid>
 </Page>

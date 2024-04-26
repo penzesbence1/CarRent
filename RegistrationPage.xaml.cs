@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +26,8 @@ namespace CarRent
         {
             InitializeComponent();
         }
+
+        public string PlaceholderText { get; set; }
 
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -85,18 +89,80 @@ namespace CarRent
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
-            mainWindow.Height = 650;
-            mainWindow.MinWidth = 800;
-            mainWindow.MinHeight = 500;
-            MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
-            mainWindow2.mainFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));
+
+
+            static bool IsEmailValid(string email)
+            {
+                var valid = true;
+
+                try
+                {
+                    var emailAddress = new MailAddress(email);
+                }
+                catch
+                {
+                    valid = false;
+                }
+
+                return valid;
+            }
+
+            string email = textBox3.Text;
+            string username = textBox1.Text;
+            string pass = textBox2.Password;
+
+            if (IsEmailValid(email))
+            {
+                lbError.Content = "Jó.";
+            }
+            else
+            {
+                lbError.Content = "Hibás email formátum!";
+            }
+
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                pass = builder.ToString();
+            }
+
+            lbError.Content = pass + " " + email + " " + username;
+
+
+
+
+            //var mainWindow = (MainWindow)Application.Current.MainWindow;
+            // mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
+            // mainWindow.Height = 650;
+            // mainWindow.MinWidth = 800;
+            // mainWindow.MinHeight = 500;
+
+            //mainWindow.mainFrame.Navigate(new HomePage());
         }
 
-       
+        private void textBox2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            
+            txJelszo.Content = "";
+            textBox2.Opacity = 1;
 
+        }
 
-
+        private void textBox2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (textBox2.Password == "")
+            {
+                textBox2.Opacity = 0.5;
+                txJelszo.Content = "Jelszó";
+            }
+           
+        }
     }
 }
