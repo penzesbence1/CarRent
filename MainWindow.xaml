@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRent"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="450"
+        Title="CarRental" Height="600" Width="450"
+        
         MinHeight="525"
-        MinWidth="450"
+        MinWidth="450" Icon="/carIcon.png"
         >
-    
+
     <Grid>
-        <Frame Name="mainFrame" NavigationUIVisibility="Hidden"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="389*"/>
+        </Grid.ColumnDefinitions>
+        <Frame Name="mainFrame" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

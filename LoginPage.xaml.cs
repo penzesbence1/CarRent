@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -96,7 +97,30 @@ namespace CarRent
             mainWindow.Height = 650;
             mainWindow.MinWidth = 800;
             mainWindow.MinHeight = 500;
-            mainWindow.mainFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));
+
+
+
+
+            string user = textBox1.Text;
+            string pass = textBox2.Password;
+
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                pass = builder.ToString();
+            }
+
+
+            lbError.Content = user + " " +pass;
+
+            mainWindow.mainFrame.Navigate(new HomePage(user));
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

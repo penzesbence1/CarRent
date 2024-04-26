@@ -9,15 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="carIcon.png" />
     <None Remove="carrenticon-rbg.png" />
     <None Remove="carrenticon.jpg" />
     <None Remove="image-removebg-preview.png" />
+    <None Remove="img\carrenticon.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="carIcon.png" />
     <Resource Include="carrenticon-rbg.png" />
     <Resource Include="carrenticon.jpg" />
     <Resource Include="image-removebg-preview.png" />
+    <Resource Include="img\carrenticon.jpg" />
   </ItemGroup>
 
   <ItemGroup>

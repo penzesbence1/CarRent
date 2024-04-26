@@ -23,9 +23,10 @@ namespace CarRent
     public partial class HomePage : Page
     {
        
-        public HomePage()
+        public HomePage(string user)
         {
             InitializeComponent();
+            lbUser.Content = user;
             Main.Content = new StartingPage();
         }
 
