@@ -11,95 +11,73 @@
       >
 
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.4*"/>
-            <!-- Az első oszlop két egységnyi helyet fog elfoglalni -->
-            <ColumnDefinition Width="2*" />
-            <!-- A második oszlop egy egységnyi helyet fog elfoglalni -->
-        </Grid.ColumnDefinitions>
+    <Grid Background="#FFCADAE5">
 
 
 
 
-
-        <Grid Background="#FF08568A" Grid.Column="0" MinWidth="100">
-
-            <Image HorizontalAlignment="Center" Height="80" Margin="0,27,0,0" VerticalAlignment="Top" Width="82" 
-                   Source="/image-removebg-preview.png"
-                   MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
-            <Label Content="User" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,110,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
-            <Label x:Name="myLabel" Content="Autók" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,160,0,0" VerticalAlignment="Top" Background="#00000000" FontSize="16" Width="200" Height="44" MouseEnter="MyLabel_MouseEnter" MouseLeave="MyLabel_MouseLeave" MouseLeftButtonUp="Autok"/>
-            <Label x:Name="myLabel2" Content="Rendeléseim" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,210,0,0" VerticalAlignment="Top" Background="#00000000" FontSize="16" Width="200" Height="44" MouseEnter="MyLabel_MouseEnter" MouseLeave="MyLabel_MouseLeave"/>
-            <Label x:Name="myLabel3" Content="Kijelentkezés" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Foreground="AntiqueWhite" Margin="0,260,0,0" VerticalAlignment="Top" Background="#00000000" FontSize="16" Width="200" Height="44" MouseEnter="MyLabel_MouseEnter" MouseLeave="MyLabel_MouseLeave"/>
-
-        </Grid>
-
-        <Grid Background="#FFCADAE5" Grid.Column="2">
-
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.05*" />
                 <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
 
-            <Rectangle Grid.Row="0">
-                <Rectangle.Fill>
-                    <SolidColorBrush Color="White"></SolidColorBrush>
-                </Rectangle.Fill>
+            <Grid Grid.Row="0">
+                <ComboBox x:Name="cBMarka" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Width="65"/>
+                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="85,0,0,0" Width="65"/>
+                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,0,0,0" Width="65"/>
+                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="235,0,0,0" Width="65"/>
+                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,0,0,0" Width="65"/>
+                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="385,0,0,0" Width="65"/>
+                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="460,0,0,0" Width="65"/>
+                <ComboBox x:Name="cbSzurok" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                          Margin="535,0,0,0" Width="200"
+                          SelectionChanged="cbSzurok_SelectionChanged">
 
-            </Rectangle>
-            <Label Content="CarRental" HorizontalAlignment="Center" Foreground="Black" 
-                   VerticalAlignment="Center" 
-                   FontWeight="Bold" FontSize="16" Grid.Row="0" 
-                   Margin="0,40,0,0"/>
-            <Image HorizontalAlignment="Center" Height="80" 
-                   VerticalAlignment="Top" Width="82"
-                   Margin="0,0,0,0"
-                   Source="/carrenticon-rbg.png"/>
+                    <ComboBoxItem>
+                        <CheckBox x:Name="cbGps" Content="GPS"/>
+                    </ComboBoxItem>
 
+                    <ComboBoxItem>
+                        <CheckBox x:Name="cbVono" Content="Vonóhorog"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem>
+                        <CheckBox x:Name="cbUlesf" Content="Ülésfűtés"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem>
+                        <CheckBox x:Name="cbTempomat" Content="Tempomat"/>
+                    </ComboBoxItem>
+
+
+
+                </ComboBox>
+            </Grid>
 
             <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.05*" />
-                    <RowDefinition Height="0.5*"/>
-                </Grid.RowDefinitions>
+               
 
-                <Grid Grid.Row="0">
-                    <ComboBox x:Name="cBMarka" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Width="65"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="85,0,0,0" Width="65"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,0,0,0" Width="65"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="235,0,0,0" Width="65"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,0,0,0" Width="65"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="385,0,0,0" Width="65"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Margin="460,0,0,0" Width="65"/>
-                </Grid>
+                <ListView x:Name="myListView" Grid.ColumnSpan="2" MouseDoubleClick="myListView_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Márka" Width="75"  DisplayMemberBinding="{Binding Marka}" />
+                            <GridViewColumn Header="Modell" Width="75" DisplayMemberBinding="{Binding Modell}" />
+                            <GridViewColumn Header="Üzemanyag" Width="75" DisplayMemberBinding="{Binding Uzemanyag}" />
+                            <GridViewColumn Header="Váltó" Width="75" DisplayMemberBinding="{Binding Valto}" />
+                            <GridViewColumn Header="Típus" Width="75" DisplayMemberBinding="{Binding Tipus}" />
+                            <GridViewColumn Header="Ülések száma" Width="75" DisplayMemberBinding="{Binding UlesekSzama}" />
+                            <GridViewColumn Header="Ár" Width="75" DisplayMemberBinding="{Binding Ar}" />
 
-                <Grid Grid.Row="1">
-
-
-
-
-                    <ListView x:Name="myListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Márka" Width="75"  DisplayMemberBinding="{Binding Marka}" />
-                                <GridViewColumn Header="Modell" Width="75" DisplayMemberBinding="{Binding Modell}" />
-                                <GridViewColumn Header="Üzemanyag" Width="75" DisplayMemberBinding="{Binding Uzemanyag}" />
-                                <GridViewColumn Header="Váltó" Width="75" DisplayMemberBinding="{Binding Valto}" />
-                                <GridViewColumn Header="Típus" Width="75" DisplayMemberBinding="{Binding Tipus}" />
-                                <GridViewColumn Header="Ülések száma" Width="75" DisplayMemberBinding="{Binding UlesekSzama}" />
-                                <GridViewColumn Header="Ár" Width="75" DisplayMemberBinding="{Binding Ar}" />
-                                <GridViewColumn Header="Kedvezmény" Width="75" DisplayMemberBinding="{Binding Kedvezmeny}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-
-                </Grid>
-
+                        </GridView>
+                    </ListView.View>
+                </ListView>
 
             </Grid>
 
+
         </Grid>
+
 
     </Grid>
 </Page>

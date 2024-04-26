@@ -22,8 +22,15 @@ namespace CarRent
     {
         public LoginPage()
         {
-            InitializeComponent();
            
+
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.Height = 600;
+            mainWindow.Width = 400;
+
+            mainWindow.MinHeight = 525;
+            mainWindow.MinWidth = 400;
+            InitializeComponent();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -89,7 +96,6 @@ namespace CarRent
             mainWindow.Height = 650;
             mainWindow.MinWidth = 800;
             mainWindow.MinHeight = 500;
-            MainWindow mainWindow2 = (MainWindow)Application.Current.MainWindow;
             mainWindow.mainFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));
         }
 

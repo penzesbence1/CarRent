@@ -1,0 +1,60 @@
+﻿<Page x:Class="CarRent.RentedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CarRent"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RentedPage">
+
+    <Grid Background="#FFCADAE5" >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Row="0">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="White"></SolidColorBrush>
+            </Rectangle.Fill>
+
+        </Rectangle>
+
+        <Image HorizontalAlignment="Center" Height="80" 
+                   VerticalAlignment="Top" Width="82"
+                   Margin="0,0,0,0"
+                   Source="/carrenticon-rbg.png"/>
+        <Label Content="CarRental" HorizontalAlignment="Center" Foreground="Black" 
+                  VerticalAlignment="Center" 
+                   FontWeight="Bold" FontSize="16" Grid.Row="0" 
+                   Margin="0,40,0,0"/>
+
+
+
+        <Grid Grid.Row="1">
+
+
+            <ListView x:Name="myListView" Grid.ColumnSpan="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Márka" Width="75"  DisplayMemberBinding="{Binding Marka}" />
+                        <GridViewColumn Header="Modell" Width="75" DisplayMemberBinding="{Binding Modell}" />
+                        <GridViewColumn Header="Üzemanyag" Width="75" DisplayMemberBinding="{Binding Uzemanyag}" />
+                        <GridViewColumn Header="Váltó" Width="75" DisplayMemberBinding="{Binding Valto}" />
+                        <GridViewColumn Header="Típus" Width="75" DisplayMemberBinding="{Binding Tipus}" />
+                        <GridViewColumn Header="Ülések száma" Width="75" DisplayMemberBinding="{Binding UlesekSzama}" />
+                        <GridViewColumn Header="Ár" Width="75" DisplayMemberBinding="{Binding Ar}" />
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+        
+        
+        
+
+    </Grid>
+</Page>

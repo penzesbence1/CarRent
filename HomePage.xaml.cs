@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +19,14 @@ using System.Windows.Shapes;
 
 namespace CarRent
 {
-    /// <summary>
-    /// Interaction logic for HomePage.xaml
-    /// </summary>
+   
     public partial class HomePage : Page
     {
+       
         public HomePage()
         {
             InitializeComponent();
+            Main.Content = new StartingPage();
         }
 
         private void MyLabel_MouseEnter(object sender, MouseEventArgs e)
@@ -50,32 +52,54 @@ namespace CarRent
 
             
         }
+       
 
-        private void myLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+
+        private void Megnyit(object sender, MouseEventArgs e)
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("CarsPage.xaml", UriKind.Relative));
+            
+                System.Windows.Controls.Label label = sender as System.Windows.Controls.Label;
 
+            string Name = label.Name;
+            switch (Name)
+            {
+                case "lbUser":
+                    Main.Content = new UserPage();
+                    break;
+
+
+                case "lbFooldal":
+                    Main.Content = new StartingPage();
+                    break;
+
+                case "lbAuto":
+                    Main.Content = new CarsPage();
+                    break;
+
+                case "lbRendeles":
+                    Main.Content = new RentedPage();
+                    break;
+
+                case "lbLogout":
+                    var mainWindow = (MainWindow)Application.Current.MainWindow;
+                    mainWindow.Height = 100;
+                    mainWindow.MinWidth = 100;
+                    mainWindow.MinHeight = 100;
+                    mainWindow.mainFrame.Navigate(new LoginPage());
+                    break;
+
+
+            }
+            
         }
 
-        private void Click(object sender, MouseButtonEventArgs e)
+        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
-
+            Main.Content = new UserPage();
         }
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
 
-        }
-        private void Autok(object sender, MouseButtonEventArgs e)
-        {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("CarsPage.xaml", UriKind.Relative));
 
-        }
+       
 
 
     }

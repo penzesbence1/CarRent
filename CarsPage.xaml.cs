@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -26,19 +27,23 @@ namespace CarRent
         public CarsPage()
         {
             InitializeComponent();
+            
 
+            cbSzurok.Items.Insert(0,"Extrák");
+            cbSzurok.SelectedIndex = 0;
 
             var autok = new List<Auto>
             {
 
-                new Auto { Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 5000000, Kedvezmeny = "20%" }, 
-                new Auto { Marka = "Toyota", Modell = "Corolla", Uzemanyag = "Dizel", Valto = "Manuális", Tipus = "Furgon", UlesekSzama = 5, Ar = 3000000 },
-                // Egyéb autók...
+                new Auto { Id = 0, Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 50000 }, 
+                new Auto { Id = 1, Marka = "Toyota", Modell = "Corolla", Uzemanyag = "Dizel", Valto = "Manuális", Tipus = "Furgon", UlesekSzama = 5, Ar = 30000 },
+                new Auto { Id = 2, Marka = "Audi", Modell = "A4", Uzemanyag = "Benzin", Valto = "Manuális", Tipus = "Sedan", UlesekSzama = 5, Ar = 40000 },
+                new Auto { Id = 3, Marka = "Mercedes-Benz", Modell = "C-Class", Uzemanyag = "Dizel", Valto = "Automata", Tipus = "Kombi", UlesekSzama = 5, Ar = 45000 },
+                new Auto { Id = 4, Marka = "Ford", Modell = "Mustang", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "Sport", UlesekSzama = 4, Ar = 60000 }
+
             };
 
-            for (int i = 0; i < 100; i++) {
-                autok.Add(new Auto { Marka = "BMW", Modell = "X5", Uzemanyag = "Benzin", Valto = "Automata", Tipus = "SUV", UlesekSzama = 5, Ar = 5000000 });
-            }
+            
             myListView.ItemsSource = autok;
 
             List<string> Markak = new List<string>();
@@ -85,57 +90,18 @@ namespace CarRent
 
         }
 
-        private void MyLabel_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-            if (sender is System.Windows.Controls.Label)
-            {
-                System.Windows.Controls.Label label = sender as System.Windows.Controls.Label;
-                label.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF0CA5DB")); // Világosabb árnyalatú szín beállítása
-            }                                                                                     // Sötétebb háttérszín beállítása
-
-        }
+        
        
 
-        private void MyLabel_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (sender is System.Windows.Controls.Label)
-            {
-                System.Windows.Controls.Label label = sender as System.Windows.Controls.Label;
-                label.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF08568A")); // Világosabb árnyalatú szín beállítása
-            }
+        
 
+        
 
-            
-        }
-
-        private void myLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Click(object sender, MouseButtonEventArgs e)
-        {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
-
-        }
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("UserPage.xaml", UriKind.Relative));
-
-        }
-        private void Autok(object sender, MouseButtonEventArgs e)
-        {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.mainFrame.Navigate(new Uri("CarsPage.xaml", UriKind.Relative));
-
-        }
-
+        
 
         public class Auto
         {
+            public int Id { get; set; }
             public string Marka { get; set; }
             public string Modell { get; set; }
             public string Uzemanyag { get; set; }
@@ -143,8 +109,32 @@ namespace CarRent
             public string Tipus { get; set; }
             public int UlesekSzama { get; set; }
             public decimal Ar { get; set; }
-            public string Kedvezmeny { get; set; }
+            
         }
 
+       
+        private void cbSzurok_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            cbSzurok.SelectedIndex = 0;
+           
+
+        }
+
+        private void myListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListView listView && listView.SelectedItem is Auto selectedCar)
+            {
+                int carId = selectedCar.Id;
+
+                NavigationService.Navigate(new AddCarPage(carId));
+
+
+
+                cbSzurok.Items.Add(this.ToString());
+
+                
+            }
+        }
     }
 }
