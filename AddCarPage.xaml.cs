@@ -25,7 +25,7 @@ namespace CarRent
             InitializeComponent();
 
             Label label = FindName("Kocsi") as Label;
-            label.Content = "Márka: "+id;
+            label.Content = "Kiválasztott autó: (id) "+id;
         }
 
        
