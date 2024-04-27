@@ -34,24 +34,24 @@ namespace CarRent
         public DateTime mettol = DateTime.Parse("1888-01-01");
         public DateTime meddig = DateTime.Parse("1888-01-01");
         TimeSpan kulonbseg;
+
+        
         private void dpMettol_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             // lbMettol.Content =
             // 
             mettol = dpMettol.SelectedDate.Value;
 
-           
-
-        }
-
-        private void dpMeddig_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            meddig = dpMeddig.SelectedDate.Value;
-
-            if (mettol != DateTime.Parse("1888-01-01"))
+            lbLeiras.Content = $"{meddig}";
+           if(mettol < DateTime.Today)
             {
+                mettol = DateTime.Today;
+                dpMettol.SelectedDate = mettol;
+            }
 
-                if(mettol > meddig)
+            if (meddig != DateTime.Parse("1888-01-01"))
+            {
+                if (mettol > meddig)
                 {
                     lbLeiras.Foreground = Brushes.Red;
                     lbLeiras.Content = "A kezdődátum későbbi mint a záródátum.";
@@ -72,7 +72,49 @@ namespace CarRent
                     lbLeiras.Content = $"{id} (id) autó bérlése {nap} napra {ar} forintért.";
                     btMegerosit.Opacity = 1;
                     btMegse.Opacity = 1;
-                   
+
+                }
+
+            }
+
+
+        }
+
+        private void dpMeddig_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            meddig = dpMeddig.SelectedDate.Value;
+
+            
+                if (meddig < DateTime.Today)
+                {
+                    meddig = DateTime.Today;
+                    dpMeddig.SelectedDate = meddig;
+                }
+
+            if (mettol != DateTime.Parse("1888-01-01"))
+            {
+                if (mettol > meddig)
+                {
+                    lbLeiras.Foreground = Brushes.Red;
+                    lbLeiras.Content = "A kezdődátum későbbi mint a záródátum.";
+                    btMegerosit.Opacity = 0;
+                    btMegse.Opacity = 0;
+                }
+                else
+                {
+                    string colorCode = "#FF08568A";
+                    BrushConverter converter = new BrushConverter();
+                    Brush brush = (Brush)converter.ConvertFromString(colorCode);
+
+                    lbLeiras.Foreground = brush;
+
+                    kulonbseg = meddig - mettol;
+                    int nap = kulonbseg.Days + 1;
+                    int ar = nap * 20000;
+                    lbLeiras.Content = $"{id} (id) autó bérlése {nap} napra {ar} forintért.";
+                    btMegerosit.Opacity = 1;
+                    btMegse.Opacity = 1;
+
                 }
             }
            

@@ -104,23 +104,38 @@ namespace CarRent
             string user = textBox1.Text;
             string pass = textBox2.Password;
 
-
-            using (SHA256 sha256Hash = SHA256.Create())
+            static string HashPass(string password)
             {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
-
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
+                using (SHA256 sha256Hash = SHA256.Create())
                 {
-                    builder.Append(bytes[i].ToString("x2"));
+                    byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < bytes.Length; i++)
+                    {
+                        builder.Append(bytes[i].ToString("x2"));
+                    }
+                    return builder.ToString();
                 }
-                pass = builder.ToString();
             }
 
+            pass = HashPass(pass);
 
-            lbError.Content = user + " " +pass;
+            string adminpass = HashPass("admin");
 
-            mainWindow.mainFrame.Navigate(new HomePage(user));
+
+
+           // lbError.Content = user + " " + pass+ " "+adminpass;
+
+            if (user == "admin" && pass == adminpass)
+            {
+                mainWindow.mainFrame.Navigate(new AdminPage(user));
+            }
+            else
+            {
+                mainWindow.mainFrame.Navigate(new HomePage(user));
+            }
+            
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
