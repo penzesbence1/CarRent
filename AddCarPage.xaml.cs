@@ -20,15 +20,40 @@ namespace CarRent
     /// </summary>
     public partial class AddCarPage : Page
     {
-        public int id;
+
+        CarRent.Context.KolcsonzoModel cn;
+        public int kocsiid;
+        public int ara;
         public AddCarPage(int id)
         {
-            this.id = id;
+            this.kocsiid = id;
             InitializeComponent();
 
             Label label = FindName("Kocsi") as Label;
-            label.Content = "Kiválasztott autó: (id) "+id;
-            
+
+
+            cn = new CarRent.Context.KolcsonzoModel();
+
+
+            var dbautok = from a in cn.Autoks
+                          join m in cn.Markaks on a.MarkaID equals m.MarkaID where a.AutoID == kocsiid
+                          select new
+                          {
+                              a.AutoID,
+                              m.MarkaNev,
+                              a.Modell,
+                              a.Evjarat,
+                              a.Ar
+                          };
+
+           var elsoAuto = dbautok.FirstOrDefault();
+
+            ara = elsoAuto.Ar;
+
+           label.Content = $"Kiválasztott autó: {elsoAuto?.MarkaNev} { elsoAuto?.Modell} ( {elsoAuto?.Evjarat} )";
+           
+
+
         }
 
         public DateTime mettol = DateTime.Parse("1888-01-01");
@@ -68,8 +93,12 @@ namespace CarRent
 
                     kulonbseg = meddig - mettol;
                     int nap = kulonbseg.Days + 1;
-                    int ar = nap * 20000;
-                    lbLeiras.Content = $"{id} (id) autó bérlése {nap} napra {ar} forintért.";
+
+
+                    int ar = nap * ara;
+
+
+                    lbLeiras.Content = $"A kiválasztott autó bérlése {nap} napra {ar} forintért.";
                     btMegerosit.Opacity = 1;
                     btMegse.Opacity = 1;
 
@@ -110,8 +139,8 @@ namespace CarRent
 
                     kulonbseg = meddig - mettol;
                     int nap = kulonbseg.Days + 1;
-                    int ar = nap * 20000;
-                    lbLeiras.Content = $"{id} (id) autó bérlése {nap} napra {ar} forintért.";
+                    int ar = nap * ara;
+                    lbLeiras.Content = $"A kiválasztott autó bérlése {nap} napra {ar} forintért.";
                     btMegerosit.Opacity = 1;
                     btMegse.Opacity = 1;
 
