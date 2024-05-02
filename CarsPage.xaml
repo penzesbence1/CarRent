@@ -37,8 +37,12 @@
                          SelectionChanged="cBTipus_SelectionChanged"/> 
                 <ComboBox x:Name="cBUles" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="460,0,0,0" Width="65"
                           SelectionChanged="cBUlesek_SelectionChanged"/>
-                <ComboBox x:Name="cBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
-                         SelectionChanged="cBAr_SelectionChanged"/> 
+
+                <TextBox x:Name="tBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
+                         TextChanged="tBAr_TextChanged">
+                </TextBox>
+                <!--<ComboBox x:Name="cBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
+                         SelectionChanged="cBAr_SelectionChanged"/>--> 
 
                 <Label Content="asdsad" x:Name="teszt" Width="50" Height="40">
                     

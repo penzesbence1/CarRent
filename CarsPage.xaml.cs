@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -99,7 +100,7 @@ namespace CarRent
             ComboBoxFeltoltes(cBValto, Valtok);
             ComboBoxFeltoltes(cBKivitel, Tipusok);
             ComboBoxFeltoltes(cBUles, Ulesszamok);
-            ComboBoxFeltoltes(cBAr, Arak);
+            //ComboBoxFeltoltes(cBAr, Arak);
         }
         public void ComboBoxFeltoltes<T>(ComboBox comboBox, List<T> adatok)
         {
@@ -446,6 +447,40 @@ namespace CarRent
                 List<string> Markak = uj.Select(a => a.Marka).ToList();
                 ComboBoxFeltoltes(cBMarka, Markak);
                 cBMarka.SelectedItem = kiv;
+
+            }
+        }
+
+        private void tBAr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text != "")
+            {
+
+
+                List<Auto> dbautok = kocsik;
+                List<Auto> szurt = new List<Auto>();
+
+                foreach (var item in dbautok)
+                {
+                    if (item.Ar <= Int32.Parse(textbox.Text))
+                    {
+                        szurt.Add(item);
+                    }
+                }
+
+                myListView.ItemsSource = szurt;
+                ComboBoxolas(szurt);
+
+               // kocsik = szurt;
+
+                var uj = Lekerdezes();
+
+                List<string> Markak = uj.Select(a => a.Marka).ToList();
+                ComboBoxFeltoltes(cBMarka, Markak);
+
+                List<string> Modellek = dbautok.Select(a => a.Modell).ToList();
+                ComboBoxFeltoltes(cBModell, Modellek);
 
             }
         }
