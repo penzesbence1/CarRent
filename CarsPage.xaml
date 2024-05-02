@@ -39,7 +39,7 @@
                           SelectionChanged="cBUlesek_SelectionChanged"/>
 
                 <TextBox x:Name="tBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
-                         TextChanged="tBAr_TextChanged">
+                         TextChanged="tBAr_TextChanged" LostFocus="tBAr_LostFocus">
                 </TextBox>
                 <!--<ComboBox x:Name="cBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
                          SelectionChanged="cBAr_SelectionChanged"/>--> 

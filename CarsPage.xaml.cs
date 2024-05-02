@@ -203,7 +203,7 @@ namespace CarRent
                 MarkaS = keres;
 
 
-                var autok = Lekerdezes();
+                var autok = kocsik;
                 List<Auto> szurt = new List<Auto>();
                 
                 foreach (var item in autok)
@@ -463,7 +463,9 @@ namespace CarRent
 
                 foreach (var item in dbautok)
                 {
-                    if (item.Ar <= Int32.Parse(textbox.Text))
+                    int a;
+                    int.TryParse(textbox.Text, out a);
+                    if (item.Ar <= a)
                     {
                         szurt.Add(item);
                     }
@@ -485,7 +487,33 @@ namespace CarRent
             }
         }
 
-        private void cBAr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void tBAr_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text != "")
+            {
+
+
+                List<Auto> dbautok = kocsik;
+                List<Auto> szurt = new List<Auto>();
+
+                foreach (var item in dbautok)
+                {
+                    int a;
+                    int.TryParse(textbox.Text, out a);
+                    if (item.Ar <= a)
+                    {
+                        szurt.Add(item);
+                    }
+                }
+
+                myListView.ItemsSource = szurt;
+                ComboBoxolas(szurt);
+
+                kocsik = szurt;
+            }
+        }
+            private void cBAr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             ComboBox comboBox = sender as ComboBox;
