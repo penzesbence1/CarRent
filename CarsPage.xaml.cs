@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace CarRent
         CarRent.Context.KolcsonzoModel cn;
         public string MarkaS, ModellS, EvjaratS;
         public List<Auto> kocsik = new List<Auto>();
-
+        public List<CheckBoxItem> extrak = new List<CheckBoxItem>();
         public CarsPage()
         {
             InitializeComponent();
@@ -53,12 +54,12 @@ namespace CarRent
             myListView.ItemsSource = autok;
 
 
+           
             
 
 
 
-
-            var extrak = (from a in cn.Extraks
+            extrak = (from a in cn.Extraks
                           select new CheckBoxItem
                           {
                               ExtraNev = a.ExtraNev,
@@ -66,10 +67,12 @@ namespace CarRent
                           }).ToList();
 
 
-           cbSzurok.ItemsSource = extrak.Distinct();
+            extrak.Insert(0, new CheckBoxItem { ExtraNev = "Extrák", IsChecked = false });
 
+            
+            cbSzurok.ItemsSource = extrak.Distinct();
 
-
+            cbSzurok.SelectedIndex = 0;
 
 
 
@@ -105,9 +108,8 @@ namespace CarRent
             ComboBoxFeltoltes(cBValto, Valtok);
             ComboBoxFeltoltes(cBKivitel, Tipusok);
             ComboBoxFeltoltes(cBUles, Ulesszamok);
-            //ComboBoxFeltoltes(cBAr, Arak);
+            
 
-            // Eredeti kiválasztott elemek újbóli kiválasztása, ha van ilyen
             if (selectedMarka != null && Markak.Contains(selectedMarka.ToString()))
             {
                 cBMarka.SelectedItem = selectedMarka;
@@ -140,10 +142,11 @@ namespace CarRent
 
         public void ComboBoxFeltoltes<T>(ComboBox comboBox, List<T> adatok)
         {
-            if (comboBox == null || adatok == null) return; // Ellenőrizzük, hogy a paraméterek nem null értéket tartalmaznak
+
+            if (comboBox == null || adatok == null) return; 
 
             
-            comboBox.ItemsSource = adatok.Distinct(); // Majd töltse újra az elemeket
+            comboBox.ItemsSource = adatok.Distinct(); 
 
 
         }
@@ -151,20 +154,55 @@ namespace CarRent
 
         public List<Auto> Lekerdezes()
         {
-            var autok = cn.Autoks.Join(cn.Markaks, a => a.MarkaID, m => m.MarkaID, (a, m) => new Auto
-            {
-                Id = a.AutoID,
-                Marka = m.MarkaNev,
-                Modell = a.Modell,
-                Evjarat = a.Evjarat,
-                Uzemanyag = a.Uzemanyag,
-                Valto = a.Valto,
-                Tipus = a.Kivitel,
-                UlesekSzama = a.Ulesekszama,
-                Ar = a.Ar
-            }).ToList();
+            var autok2 = from a in cn.Autoks
+                         join m in cn.Markaks on a.MarkaID equals m.MarkaID
+                         select new
+                         {
+                             a.AutoID,
+                             m.MarkaNev,
+                             a.Modell,
+                             a.Evjarat,
+                             a.Uzemanyag,
+                             a.Valto,
+                              a.Kivitel,
+                             a.Ulesekszama,
+                             a.Ar,
+                             a.Extraks
+                         };
 
-            return autok;
+
+            List<Auto> autok3 = new List<Auto>();
+
+            foreach (var item in autok2)
+            {
+                Auto auto = new Auto
+                {
+                    Id = item.AutoID,
+                    Marka = item.MarkaNev,
+                    Modell = item.Modell,
+                    Evjarat = item.Evjarat,
+                    Uzemanyag = item.Uzemanyag,
+                    Valto = item.Valto,
+                    Tipus = item.Kivitel,
+                    UlesekSzama = item.Ulesekszama,
+                    Ar = item.Ar,
+                    Extrak = (List<Extrak>)item.Extraks,
+
+                   
+                  
+                };
+            foreach (var extrak in item.Extraks)
+            {
+                auto.ExtrakNev.Add(extrak.ExtraNev); 
+            }
+
+            autok3.Add(auto);
+            }
+
+          
+            
+            return autok3;
+
 
         }
         public class CheckBoxItem
@@ -184,7 +222,15 @@ namespace CarRent
             public string Tipus { get; set; }
             public int UlesekSzama { get; set; }
             public int Ar { get; set; }
+            
+            public List<Extrak> Extrak { get; set; }
+            public List<string> ExtrakNev { get; set; }
 
+
+            public Auto()
+            {
+                ExtrakNev = new List<string>();
+            }
         }
 
 
@@ -192,56 +238,118 @@ namespace CarRent
 
         private void cbSzurok_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-            List<CheckBoxItem> selectedItems = new List<CheckBoxItem>();
 
-            // Végigmegyünk az összes ComboBox-ban található elemen
+            cbSzurok.SelectedIndex = 0;
+
+        }
+
+
+        private void cbSzurok_DropDownOpened(object sender, EventArgs e)
+        {
+            extrak.Remove(extrak.FirstOrDefault(item => item.ExtraNev == "Extrák"));
+
+            cbSzurok.ItemsSource = extrak.Distinct();
+        }
+
+        private void cbSzurok_DropDownClosed(object sender, EventArgs e)
+        {
+            extrak.Insert(0, new CheckBoxItem { ExtraNev = "Extrák", IsChecked = false });
+
+            cbSzurok.ItemsSource = extrak.Distinct();
+
+            cbSzurok.SelectedIndex = 0;
+        }
+
+       
+
+        public List<Auto> Szures()
+        {
+            
+            string keresMarka = cBMarka.SelectedItem?.ToString();
+            string keresModell = cBModell.SelectedItem?.ToString();
+            string keresEvjarat = cBEvjarat.SelectedItem?.ToString();
+            string keresUzemanyag = cBUzemanyag.SelectedItem?.ToString();
+            string keresValto = cBValto.SelectedItem?.ToString();
+            string keresKivitel = cBKivitel.SelectedItem?.ToString();
+            string keresUlesSzam = cBUles.SelectedItem?.ToString();
+
+            var szurt = kocsik.Where(item =>
+                (keresMarka == null || item.Marka == keresMarka) &&
+                (keresModell == null || item.Modell == keresModell) &&
+                (keresEvjarat == null || item.Evjarat.ToString() == keresEvjarat) &&
+                (keresUzemanyag == null || item.Uzemanyag == keresUzemanyag) &&
+                (keresValto == null || item.Valto == keresValto) &&
+                (keresKivitel == null || item.Tipus == keresKivitel) &&
+                (keresUlesSzam == null || item.UlesekSzama.ToString() == keresUlesSzam)
+            ).ToList();
+
+
+            List<string> selectedItems = new List<string>();
+
+           
             foreach (var comboBoxItem in cbSzurok.Items)
             {
-                // Ellenőrizzük, hogy az aktuális elem CheckBoxItem típusú és kiválasztva van-e
+                
                 if (comboBoxItem is CheckBoxItem item && item.IsChecked)
                 {
-                    // Ha igen, hozzáadjuk az elemet a kiválasztott elemek listájához
-                    selectedItems.Add(item);
+                    
+                    selectedItems.Add(item.ExtraNev);
                 }
             }
 
-        }
+
+            List<Auto> szurt2 = new List<Auto>();
 
 
-
-
-        private void cBSzuresek_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ComboBox comboBox = sender as ComboBox;
-
-            if (comboBox.SelectedItem != null)
+            if (selectedItems.Count > 0) {
+              szurt2 = szurt.Where(auto =>
             {
-                string keresMarka = cBMarka.SelectedItem?.ToString();
-                string keresModell = cBModell.SelectedItem?.ToString();
-                string keresEvjarat = cBEvjarat.SelectedItem?.ToString();
-                string keresUzemanyag = cBUzemanyag.SelectedItem?.ToString();
-                string keresValto = cBValto.SelectedItem?.ToString();
-                string keresKivitel = cBKivitel.SelectedItem?.ToString();
-                string keresUlesSzam = cBUles.SelectedItem?.ToString() ;
-
-                var szurt = kocsik.Where(item =>
-                    (keresMarka == null || item.Marka == keresMarka ) &&
-                    (keresModell == null || item.Modell == keresModell ) &&
-                    (keresEvjarat == null || item.Evjarat.ToString() == keresEvjarat ) &&
-                    (keresUzemanyag == null || item.Uzemanyag == keresUzemanyag ) &&
-                    (keresValto == null || item.Valto == keresValto ) &&
-                    (keresKivitel == null || item.Tipus == keresKivitel ) &&
-                    (keresUlesSzam == null || item.UlesekSzama.ToString() == keresUlesSzam )
-                ).ToList();
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
                 
+                return selectedItems.All(kivEx => auto.ExtrakNev != null && auto.ExtrakNev.Any(ex => ex == kivEx));
+            }).ToList();
+
             }
+            else
+            {
+                szurt2 = szurt;
+            }
+
+
+            List<Auto> szurt3 = new List<Auto>();
+
+            int a = 9999999;
+
+            if (tBAr.Text == "" || tBAr.Text == null)
+            {
+               
+                a = 9999999;
+            }
+            else
+            {
+                int.TryParse(tBAr.Text, out a);
+            }
+
+
+            foreach (var item in szurt2)
+            {
+               
+               
+               if (item.Ar <= a)
+                {
+                    szurt3.Add(item);
+                }
+            }
+
+
+
+
+            myListView.ItemsSource = szurt3;
+            ComboBoxolas(szurt3);
+
+
+            return szurt3;
         }
+
 
 
         private void myListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -258,79 +366,13 @@ namespace CarRent
             }
         }
 
-        
-        private void tBAr_TextChanged(object sender, TextChangedEventArgs e)
+        private void Szures(object sender, RoutedEventArgs e)
         {
-            TextBox textbox = sender as TextBox;
-
-            List<Auto> dbautok = kocsik;
-            List<Auto> szurt = new List<Auto>();
-            int a;
-            if (textbox.Text == "")
-            {
-
-                a = 999999;
-            }
-            else
-            {
-                int.TryParse(textbox.Text, out a);
-            }
-
-                foreach (var item in dbautok)
-                {
-                    
-                    
-                    if (item.Ar <= a)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-               // kocsik = szurt;
-
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-
-                List<string> Modellek = dbautok.Select(a => a.Modell).ToList();
-                ComboBoxFeltoltes(cBModell, Modellek);
-
-            teszt.Content = textbox.Text;
-            }
-        
-
-        private void tBAr_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-            if (textbox.Text != "")
-            {
-
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    int a;
-                    int.TryParse(textbox.Text, out a);
-                    if (item.Ar <= a)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-            }
-            
+            Szures();
         }
-          
+
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
