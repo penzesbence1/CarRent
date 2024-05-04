@@ -44,7 +44,7 @@
                 <!--<ComboBox x:Name="cBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
                          SelectionChanged="cBAr_SelectionChanged"/>-->
 
-                <Label Content="asdsad" x:Name="teszt" Margin="530,-9,35,0" VerticalAlignment="Top"/>
+                <Label Content="Max ár" x:Name="teszt" Margin="550,1,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="0 0 0 0"/>
                 <ComboBox x:Name="cbSzurok" HorizontalAlignment="Left" VerticalAlignment="Center" 
                           Margin="610,0,0,0" Width="150"
                           SelectionChanged="cbSzurok_SelectionChanged">
