@@ -24,36 +24,34 @@
 
             <Grid Grid.Row="0">
                 <ComboBox x:Name="cBMarka" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Width="65" 
-                          SelectionChanged="cBMarka_SelectionChanged"/>
+                          SelectionChanged="cBSzuresek_SelectionChanged"/>
                 <ComboBox x:Name="cBModell" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="85,0,0,0" Width="65"
-                          SelectionChanged="cBModell_SelectionChanged"/>
+                          SelectionChanged="cBSzuresek_SelectionChanged"/>
                 <ComboBox x:Name="cBEvjarat" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="160,0,0,0" Width="65"
-                          SelectionChanged="cBEvjarat_SelectionChanged"/>
+                          SelectionChanged="cBSzuresek_SelectionChanged"/>
                 <ComboBox x:Name="cBUzemanyag" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="235,0,0,0" Width="65"
-                          SelectionChanged="cBUzemanyag_SelectionChanged"/>
+                          SelectionChanged="cBSzuresek_SelectionChanged"/>
                 <ComboBox x:Name="cBValto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,0,0,0" Width="65"
-                         SelectionChanged="cBValto_SelectionChanged"/> 
+                         SelectionChanged="cBSzuresek_SelectionChanged"/>
                 <ComboBox x:Name="cBKivitel" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="385,0,0,0" Width="65"
-                         SelectionChanged="cBTipus_SelectionChanged"/> 
+                         SelectionChanged="cBSzuresek_SelectionChanged"/>
                 <ComboBox x:Name="cBUles" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="460,0,0,0" Width="65"
-                          SelectionChanged="cBUlesek_SelectionChanged"/>
+                          SelectionChanged="cBSzuresek_SelectionChanged"/>
 
                 <TextBox x:Name="tBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
                          TextChanged="tBAr_TextChanged" LostFocus="tBAr_LostFocus">
                 </TextBox>
                 <!--<ComboBox x:Name="cBAr" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="535,0,0,0" Width="65"
-                         SelectionChanged="cBAr_SelectionChanged"/>--> 
+                         SelectionChanged="cBAr_SelectionChanged"/>-->
 
-                <Label Content="asdsad" x:Name="teszt" Width="50" Height="40">
-                    
-                </Label>
+                <Label Content="asdsad" x:Name="teszt" Margin="530,-9,35,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cbSzurok" HorizontalAlignment="Left" VerticalAlignment="Center" 
                           Margin="610,0,0,0" Width="150"
                           SelectionChanged="cbSzurok_SelectionChanged">
 
-                  
+
                     <ComboBox.ItemTemplate>
-                        
+
                         <DataTemplate>
                             <CheckBox Content="{Binding ExtraNev}" IsChecked="{Binding IsChecked}"/>
                         </DataTemplate>
@@ -62,12 +60,12 @@
 
                 <Button Content="Törlés" HorizontalAlignment="Left" VerticalAlignment="Center" 
                           Margin="770,0,0,0" Width="45" Click="Button_Click"/>
-               
+
             </Grid>
 
             <Grid Grid.Row="1">
 
-                
+
                 <ListView x:Name="myListView" Grid.ColumnSpan="2" MouseDoubleClick="myListView_MouseDoubleClick">
                     <ListView.View>
                         <GridView>
@@ -82,8 +80,8 @@
 
                         </GridView>
                     </ListView.View>
-                    </ListView>
-                
+                </ListView>
+
             </Grid>
 
 

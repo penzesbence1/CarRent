@@ -66,11 +66,7 @@ namespace CarRent
                           }).ToList();
 
 
-            foreach (var item in extrak)
-            {
-                cbSzurok.Items.Add(item);
-            }
-            // cbSzurok.ItemsSource = extrak;
+           cbSzurok.ItemsSource = extrak.Distinct();
 
 
 
@@ -90,8 +86,17 @@ namespace CarRent
             List<string> Valtok = autok.Select(a => a.Valto).ToList();
             List<string> Tipusok = autok.Select(a => a.Tipus).ToList();
             List<int> Ulesszamok = autok.Select(a => a.UlesekSzama).ToList();
-            List<int> Arak = autok.Select(a => a.Ar).ToList();
+           // List<int> Arak = autok.Select(a => a.Ar).ToList();
 
+            // Eredeti kiválasztott elemek mentése
+            var selectedMarka = cBMarka.SelectedItem;
+            var selectedModell = cBModell.SelectedItem;
+            var selectedEvjarat = cBEvjarat.SelectedItem;
+            var selectedUzemanyag = cBUzemanyag.SelectedItem;
+            var selectedValto = cBValto.SelectedItem;
+            var selectedKivitel = cBKivitel.SelectedItem;
+            var selectedUlesSzam = cBUles.SelectedItem;
+            //var selectedAr = cBAr.SelectedItem;
 
             ComboBoxFeltoltes(cBMarka, Markak);
             ComboBoxFeltoltes(cBModell, Modellek);
@@ -101,19 +106,49 @@ namespace CarRent
             ComboBoxFeltoltes(cBKivitel, Tipusok);
             ComboBoxFeltoltes(cBUles, Ulesszamok);
             //ComboBoxFeltoltes(cBAr, Arak);
-        }
-        public void ComboBoxFeltoltes<T>(ComboBox comboBox, List<T> adatok)
-        {
 
-            if (comboBox == null || adatok == null) return;
-
-            comboBox.Items.Clear();
-
-            foreach (var item in adatok.Distinct())
+            // Eredeti kiválasztott elemek újbóli kiválasztása, ha van ilyen
+            if (selectedMarka != null && Markak.Contains(selectedMarka.ToString()))
             {
-                comboBox.Items.Add(item);
+                cBMarka.SelectedItem = selectedMarka;
+            }
+            if (selectedModell != null && Modellek.Contains(selectedModell.ToString()))
+            {
+                cBModell.SelectedItem = selectedModell;
+            }
+            if (selectedEvjarat != null && Evjaratok.Contains((int)selectedEvjarat))
+            {
+                cBEvjarat.SelectedItem = selectedEvjarat;
+            }
+            if (selectedUzemanyag != null && Uzemanyagok.Contains(selectedUzemanyag.ToString()))
+            {
+                cBUzemanyag.SelectedItem = selectedUzemanyag;
+            }
+            if (selectedValto != null && Valtok.Contains(selectedValto.ToString()))
+            {
+                cBValto.SelectedItem = selectedValto;
+            }
+            if (selectedKivitel != null && Tipusok.Contains(selectedKivitel.ToString()))
+            {
+                cBKivitel.SelectedItem = selectedKivitel;
+            }
+            if (selectedUlesSzam != null && Ulesszamok.Contains((int)selectedUlesSzam))
+            {
+                cBUles.SelectedItem = selectedUlesSzam;
             }
         }
+
+        public void ComboBoxFeltoltes<T>(ComboBox comboBox, List<T> adatok)
+        {
+            if (comboBox == null || adatok == null) return; // Ellenőrizzük, hogy a paraméterek nem null értéket tartalmaznak
+
+            
+            comboBox.ItemsSource = adatok.Distinct(); // Majd töltse újra az elemeket
+
+
+        }
+
+
         public List<Auto> Lekerdezes()
         {
             var autok = cn.Autoks.Join(cn.Markaks, a => a.MarkaID, m => m.MarkaID, (a, m) => new Auto
@@ -173,6 +208,42 @@ namespace CarRent
 
         }
 
+
+
+
+        private void cBSzuresek_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            ComboBox comboBox = sender as ComboBox;
+
+            if (comboBox.SelectedItem != null)
+            {
+                string keresMarka = cBMarka.SelectedItem?.ToString();
+                string keresModell = cBModell.SelectedItem?.ToString();
+                string keresEvjarat = cBEvjarat.SelectedItem?.ToString();
+                string keresUzemanyag = cBUzemanyag.SelectedItem?.ToString();
+                string keresValto = cBValto.SelectedItem?.ToString();
+                string keresKivitel = cBKivitel.SelectedItem?.ToString();
+                string keresUlesSzam = cBUles.SelectedItem?.ToString() ;
+
+                var szurt = kocsik.Where(item =>
+                    (keresMarka == null || item.Marka == keresMarka ) &&
+                    (keresModell == null || item.Modell == keresModell ) &&
+                    (keresEvjarat == null || item.Evjarat.ToString() == keresEvjarat ) &&
+                    (keresUzemanyag == null || item.Uzemanyag == keresUzemanyag ) &&
+                    (keresValto == null || item.Valto == keresValto ) &&
+                    (keresKivitel == null || item.Tipus == keresKivitel ) &&
+                    (keresUlesSzam == null || item.UlesekSzama.ToString() == keresUlesSzam )
+                ).ToList();
+
+                myListView.ItemsSource = szurt;
+                ComboBoxolas(szurt);
+
+                
+            }
+        }
+
+
         private void myListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (sender is ListView listView && listView.SelectedItem is Auto selectedCar)
@@ -187,284 +258,28 @@ namespace CarRent
             }
         }
 
-        private void cBMarka_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ComboBox comboBox = sender as ComboBox;
-          
-           
-
-            if (comboBox.SelectedItem != null)
-            {
-                ComboBoxItem kiv = comboBox.SelectedItem as ComboBoxItem;
-               
-                string keres = comboBox.SelectedItem.ToString();
-                teszt.Content = keres;
-                MarkaS = keres;
-
-
-                var autok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-                
-                foreach (var item in autok)
-                {
-                    if (item.Marka == keres){
-                        szurt.Add(item);
-                    }
-                }
-              
-
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-                kocsik = szurt;
-               
-            }
-        }
-
-        private void cBModell_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            List<string> regiek = new List<string>();
-
-            foreach (var elem in cBModell.Items)
-            {
-                regiek.Add(elem.ToString());
-            }
-
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                ComboBoxItem kiv = comboBox.SelectedItem as ComboBoxItem;
-                string keres = comboBox.SelectedItem.ToString();
-
-               
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    if (item.Modell == keres)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-
-                List<string> Modellek = dbautok.Select(a => a.Modell).ToList();
-                ComboBoxFeltoltes(cBModell, regiek);
-                cBMarka.SelectedItem = kiv;
-
-
-                
-            }
-        }
-
-        private void cBEvjarat_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                string keres = comboBox.SelectedItem.ToString();
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    if (item.Evjarat.ToString() == keres)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-
-
-
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-
-            }
-
         
-
-
-            
-        }
-
-        private void cBUzemanyag_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                ComboBoxItem kiv = comboBox.SelectedItem as ComboBoxItem;
-                string keres = comboBox.SelectedItem.ToString();
-
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    if (item.Uzemanyag.ToString() == keres)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-                cBMarka.SelectedItem = kiv;
-
-            }
-        }
-
-        private void cBValto_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                ComboBoxItem kiv = comboBox.SelectedItem as ComboBoxItem;
-                string keres = comboBox.SelectedItem.ToString();
-
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    if (item.Valto.ToString() == keres)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                //  ComboBoxFeltoltes(cBModell, Modellek);
-                cBMarka.SelectedItem = kiv;
-
-            }
-        }
-
-        private void cBTipus_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                ComboBoxItem kiv = comboBox.SelectedItem as ComboBoxItem;
-                string keres = comboBox.SelectedItem.ToString();
-
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    if (item.Tipus.ToString() == keres)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-                cBMarka.SelectedItem = kiv;
-
-            }
-        }
-
-        private void cBUlesek_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                ComboBoxItem kiv = comboBox.SelectedItem as ComboBoxItem;
-                string keres = comboBox.SelectedItem.ToString();
-
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    if (item.UlesekSzama.ToString() == keres)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-                cBMarka.SelectedItem = kiv;
-
-            }
-        }
-
         private void tBAr_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
-            if (textbox.Text != "")
+
+            List<Auto> dbautok = kocsik;
+            List<Auto> szurt = new List<Auto>();
+            int a;
+            if (textbox.Text == "")
             {
 
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
+                a = 999999;
+            }
+            else
+            {
+                int.TryParse(textbox.Text, out a);
+            }
 
                 foreach (var item in dbautok)
                 {
-                    int a;
-                    int.TryParse(textbox.Text, out a);
+                    
+                    
                     if (item.Ar <= a)
                     {
                         szurt.Add(item);
@@ -484,8 +299,9 @@ namespace CarRent
                 List<string> Modellek = dbautok.Select(a => a.Modell).ToList();
                 ComboBoxFeltoltes(cBModell, Modellek);
 
+            teszt.Content = textbox.Text;
             }
-        }
+        
 
         private void tBAr_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -512,40 +328,9 @@ namespace CarRent
 
                 kocsik = szurt;
             }
+            
         }
-            private void cBAr_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null)
-            {
-                ComboBoxItem kiv = comboBox.SelectedItem as ComboBoxItem;
-                string keres = comboBox.SelectedItem.ToString();
-
-
-                List<Auto> dbautok = kocsik;
-                List<Auto> szurt = new List<Auto>();
-
-                foreach (var item in dbautok)
-                {
-                    if (item.Ar.ToString() == keres)
-                    {
-                        szurt.Add(item);
-                    }
-                }
-
-                myListView.ItemsSource = szurt;
-                ComboBoxolas(szurt);
-
-                kocsik = szurt;
-                var uj = Lekerdezes();
-
-                List<string> Markak = uj.Select(a => a.Marka).ToList();
-                ComboBoxFeltoltes(cBMarka, Markak);
-                cBMarka.SelectedItem = kiv;
-
-            }
-        }
+          
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
