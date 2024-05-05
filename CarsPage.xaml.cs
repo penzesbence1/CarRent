@@ -68,6 +68,8 @@ namespace CarRent
 
             cbSzurok.SelectedIndex = 0;
 
+
+
         }
 
         public void ComboBoxolas(List<Auto> ujautok)
@@ -172,7 +174,7 @@ namespace CarRent
                 kolcsonzesek.Add(kolcs);
             }
 
-            teszt.Content = kolcsonzesek[0].Meddig;
+       
 
             var autok2 = from a in cn.Autoks
                          join m in cn.Markaks on a.MarkaID equals m.MarkaID
@@ -299,10 +301,20 @@ namespace CarRent
         {
             if (sender is ListView listView && listView.SelectedItem is Auto selectedCar)
             {
+                if(dPMettol.SelectedDate != null || dPMeddig.SelectedDate != null)
+                {
+
+                
                 int carId = selectedCar.Id;
 
-                NavigationService.Navigate(new AddCarPage(carId));
+                NavigationService.Navigate(new AddCarPage(carId, mettol, meddig));
+                }
+                else
+                {
 
+                    lBHiba.Content = "Válasszon dátumot!";
+                    lBHiba.Opacity = 1;
+                }
 
 
 
@@ -321,9 +333,10 @@ namespace CarRent
             string keresKivitel = cBKivitel.SelectedItem?.ToString();
             string keresUlesSzam = cBUles.SelectedItem?.ToString();
             DateTime keresMettol;
+
             if (dPMettol.SelectedDate == null)
             {
-                keresMettol = DateTime.Parse("2888-01-01");
+                keresMettol = DateTime.Parse("1888-01-01");
             }
             else
             {
@@ -340,10 +353,9 @@ namespace CarRent
                 keresMeddig = (DateTime)dPMeddig.SelectedDate;
             }
 
+           
+            var datum = kolcsonzesek.Where(item => item.Meddig < keresMettol || item.Mettol > keresMeddig).ToList();
 
-            var datum = kolcsonzesek.Where(item => item.Meddig < keresMettol).ToList();
-
-            teszt.Content = datum.Count;
 
 
             var szurt = kocsik.Where(item =>
@@ -436,9 +448,6 @@ namespace CarRent
 
 
 
-        
-        TimeSpan kulonbseg;
-
 
         private void dpMettol_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -452,21 +461,27 @@ namespace CarRent
                 dPMettol.SelectedDate = mettol;
             }
 
-            if (meddig != DateTime.Parse("2888-01-01"))
+            if (dPMeddig.SelectedDate != null )
             {
+               
                 if (mettol > meddig)
                 {
-                    teszt.Content = "ROSSZ";
+                    lBHiba.Content = "A kezdődátum nem lehet korábbi mint a végdátum!";
+                    lBHiba.Opacity= 1;
+
                 }
                 else
                 {
-                    teszt.Content = "JÓ";
-
+                    mettol = dPMettol.SelectedDate.Value;
+                    meddig = dPMeddig.SelectedDate.Value;
+                    lBHiba.Opacity= 0;
+                    Szuresek();
                 }
 
+               
             }
 
-            Szuresek();
+           
         }
 
 
@@ -484,21 +499,25 @@ namespace CarRent
                 dPMeddig.SelectedDate = meddig;
             }
 
-            if (mettol != DateTime.Parse("1888-01-01"))
+            if (dPMeddig.SelectedDate != null)
             {
+
                 if (mettol > meddig)
                 {
-                    teszt.Content = "ROSSZ";
+                    lBHiba.Content = "A kezdődátum nem lehet korábbi mint a végdátum!";
+                    lBHiba.Opacity = 1;
+
                 }
                 else
                 {
-                    teszt.Content = "JÓ";
-
+                    mettol = dPMettol.SelectedDate.Value;
+                    meddig = dPMeddig.SelectedDate.Value;
+                    lBHiba.Opacity = 0;
+                    Szuresek();
                 }
+
             }
 
-
-            Szuresek();
 
 
         }

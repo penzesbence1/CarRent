@@ -24,9 +24,19 @@ namespace CarRent
         CarRent.Context.KolcsonzoModel cn;
         public int kocsiid;
         public int ara;
-        public AddCarPage(int id)
+        public DateTime mettol;
+        public DateTime meddig;
+        public AddCarPage(int id, DateTime mettolx, DateTime meddigx)
         {
+
+            mettol = mettolx;
+
+            meddig = meddigx;
+
+
             this.kocsiid = id;
+
+
             InitializeComponent();
 
             Label label = FindName("Kocsi") as Label;
@@ -48,109 +58,27 @@ namespace CarRent
 
            var elsoAuto = dbautok.FirstOrDefault();
 
-            ara = elsoAuto.Ar;
+           ara = elsoAuto.Ar;
 
            label.Content = $"Kiválasztott autó: {elsoAuto?.MarkaNev} { elsoAuto?.Modell} ( {elsoAuto?.Evjarat} )";
+
+            TimeSpan kulonbseg;
+
+            kulonbseg = meddig - mettol;
+            int nap = kulonbseg.Days + 1;
+
+
+            int ar = nap * ara;
+
+            lbMettol.Content = $"Ettől: {mettol.Year}. {mettol.Month.ToString("00")}. {mettol.Day.ToString("00")}. ";
+
+            lbMeddig.Content = $"Eddig: {meddig.Year}. {meddig.Month.ToString("00")}. {meddig.Day.ToString("00")}. ";
+            lbLeiras.Content = $"A kiválasztott autó bérlése {nap} napra {ar} forintért.";
            
 
-
         }
 
-        public DateTime mettol = DateTime.Parse("1888-01-01");
-        public DateTime meddig = DateTime.Parse("1888-01-01");
-        TimeSpan kulonbseg;
-
-        
-        private void dpMettol_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // lbMettol.Content =
-            // 
-            mettol = dpMettol.SelectedDate.Value;
-
-            lbLeiras.Content = $"{meddig}";
-           if(mettol < DateTime.Today)
-            {
-                mettol = DateTime.Today;
-                dpMettol.SelectedDate = mettol;
-            }
-
-            if (meddig != DateTime.Parse("1888-01-01"))
-            {
-                if (mettol > meddig)
-                {
-                    lbLeiras.Foreground = Brushes.Red;
-                    lbLeiras.Content = "A kezdődátum későbbi mint a záródátum.";
-                    btMegerosit.Opacity = 0;
-                    btMegse.Opacity = 0;
-                }
-                else
-                {
-                    string colorCode = "#FF08568A";
-                    BrushConverter converter = new BrushConverter();
-                    Brush brush = (Brush)converter.ConvertFromString(colorCode);
-
-                    lbLeiras.Foreground = brush;
-
-                    kulonbseg = meddig - mettol;
-                    int nap = kulonbseg.Days + 1;
-
-
-                    int ar = nap * ara;
-
-
-                    lbLeiras.Content = $"A kiválasztott autó bérlése {nap} napra {ar} forintért.";
-                    btMegerosit.Opacity = 1;
-                    btMegse.Opacity = 1;
-
-                }
-
-            }
-
-
-        }
-
-        private void dpMeddig_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            meddig = dpMeddig.SelectedDate.Value;
-
-            
-                if (meddig < DateTime.Today)
-                {
-                    meddig = DateTime.Today;
-                    dpMeddig.SelectedDate = meddig;
-                }
-
-            if (mettol != DateTime.Parse("1888-01-01"))
-            {
-                if (mettol > meddig)
-                {
-                    lbLeiras.Foreground = Brushes.Red;
-                    lbLeiras.Content = "A kezdődátum későbbi mint a záródátum.";
-                    btMegerosit.Opacity = 0;
-                    btMegse.Opacity = 0;
-                }
-                else
-                {
-                    string colorCode = "#FF08568A";
-                    BrushConverter converter = new BrushConverter();
-                    Brush brush = (Brush)converter.ConvertFromString(colorCode);
-
-                    lbLeiras.Foreground = brush;
-
-                    kulonbseg = meddig - mettol;
-                    int nap = kulonbseg.Days + 1;
-                    int ar = nap * ara;
-                    lbLeiras.Content = $"A kiválasztott autó bérlése {nap} napra {ar} forintért.";
-                    btMegerosit.Opacity = 1;
-                    btMegse.Opacity = 1;
-
-                }
-            }
-           
-
-            
-
-        }
+ 
 
         private void btMegse_Click(object sender, RoutedEventArgs e)
         {

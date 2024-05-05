@@ -46,7 +46,7 @@
                 </TextBox>
 
 
-                <Label Content="Max ár" x:Name="teszt" Margin="548,26,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="0 0 0 0" RenderTransformOrigin="0.501,-0.774"/>
+                <Label Content="Max ár / nap" x:Name="teszt" Margin="533,35,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="0 0 0 0" RenderTransformOrigin="0.501,-0.774"/>
                 <ComboBox x:Name="cbSzurok" HorizontalAlignment="Left" VerticalAlignment="Top" 
                           Margin="608,52,0,0" Width="150"
                           SelectionChanged="cbSzurok_SelectionChanged"
@@ -68,6 +68,7 @@
                           SelectedDateChanged="dpMeddig_SelectedDateChanged"/>
                 <Label Content="Mettől" x:Name="teszt_Copy" Margin="20,14,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="0 0 0 0" RenderTransformOrigin="0.501,-0.774" Width="63"/>
                 <Label Content="Meddig" x:Name="teszt_Copy1" Margin="245,14,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="0 0 0 0" RenderTransformOrigin="0.501,-0.774" Width="65"/>
+                <Label Content="A kezdődátum nem lehet kisebb mint a végdátum!" Opacity="0" Foreground="Red" x:Name="lBHiba" Margin="458,14,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Padding="0 0 0 0" RenderTransformOrigin="0.501,-0.774"/>
 
             </Grid>
 

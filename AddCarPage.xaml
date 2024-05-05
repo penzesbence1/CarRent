@@ -34,40 +34,33 @@
 
         <StackPanel Grid.Row="1" >
 
-            <Label x:Name="Kocsi"  Content="Név" HorizontalAlignment="Center" 
+            <Label x:Name="Kocsi"  Margin="0,20,0,0" HorizontalContentAlignment="Center" Content="Név" HorizontalAlignment="Center" 
                 Grid.Row="1" 
                VerticalAlignment="Top" 
                    FontSize="18" 
                FontWeight="Bold" Foreground="#FF08568A"/>
 
-            <Label x:Name="lbMettol"  Content="Mettől" HorizontalAlignment="Center" 
-                Grid.Row="1" Margin="0,10,0,0"
+            <Label x:Name="lbMettol"  Content="Ettől:" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+                Grid.Row="1" Margin="0,20,0,0"
                VerticalAlignment="Top" FontSize="18" 
                FontWeight="Bold" Foreground="#FF08568A"/>
 
-            <DatePicker x:Name="dpMettol"  Width="200" Text="Szia" 
-                        SelectedDateChanged="dpMettol_SelectedDateChanged"/>
-
-            <Label x:Name="lbMeddig"  Content="Meddig" HorizontalAlignment="Center" 
-                Grid.Row="1" Margin="0,10,0,0"
+            <Label x:Name="lbMeddig"  Content="Eddig:" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+                Grid.Row="1" Margin="0,20,0,0"
                VerticalAlignment="Top" FontSize="18" 
                FontWeight="Bold" Foreground="#FF08568A"/>
 
-            <DatePicker x:Name="dpMeddig" Width="200" Text="Szia"
-             SelectedDateChanged="dpMeddig_SelectedDateChanged"           
-             />
-
-            <Label x:Name="lbLeiras"  Content="" HorizontalAlignment="Center" 
-                Grid.Row="1" Margin="0,50,0,0"
+            <Label x:Name="lbLeiras" HorizontalContentAlignment="Center" Content="" HorizontalAlignment="Center" 
+                Grid.Row="1" Margin="0,20,0,0"
                VerticalAlignment="Top" FontSize="18" 
                FontWeight="Bold" Foreground="#FF08568A"/>
 
             <Button x:Name="btMegerosit" Content="Megerősít" HorizontalAlignment="Center"
-                Height="35" Margin="200,100,0,0" VerticalAlignment="Top" 
+                Height="35" Margin="200,50,0,0" VerticalAlignment="Top" 
                 Width="150" FontFamily="Segoe UI Semibold"
                 FontWeight="Bold" FontSize="16" Background="DarkGreen"
                 Foreground="#FFE3E3E3" 
-                Opacity="0" Click="btMegerosit_Click"    
+                Opacity="1" Click="btMegerosit_Click"    
                 />
 
             <Button x:Name="btMegse" Content="Mégse" HorizontalAlignment="Center"
@@ -75,7 +68,7 @@
                 Width="150" FontFamily="Segoe UI Semibold"
                 FontWeight="Bold" FontSize="16" Background="DarkRed"
                 Foreground="#FFE3E3E3" 
-                Opacity="0" Click="btMegse_Click"/>
+                Opacity="1" Click="btMegse_Click"/>
 
         </StackPanel>
 
