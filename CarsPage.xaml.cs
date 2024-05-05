@@ -31,17 +31,17 @@ namespace CarRent
         CarRent.Context.KolcsonzoModel cn;
         public string MarkaS, ModellS, EvjaratS;
         public List<Auto> kocsik = new List<Auto>();
+        public List<Kolcsonzes> kolcsonzesek = new List<Kolcsonzes>();
         public List<CheckBoxItem> extrak = new List<CheckBoxItem>();
+        public DateTime mettol;
+        public DateTime meddig;
+
         public CarsPage()
         {
             InitializeComponent();
 
-           
 
             cn = new CarRent.Context.KolcsonzoModel();
-
-
-
 
 
             var autok = Lekerdezes();
@@ -52,12 +52,6 @@ namespace CarRent
 
 
             myListView.ItemsSource = autok;
-
-
-           
-            
-
-
 
             extrak = (from a in cn.Extraks
                           select new CheckBoxItem
@@ -74,10 +68,8 @@ namespace CarRent
 
             cbSzurok.SelectedIndex = 0;
 
-
-
-
         }
+
         public void ComboBoxolas(List<Auto> ujautok)
         {
             var autok = ujautok;
@@ -89,7 +81,7 @@ namespace CarRent
             List<string> Valtok = autok.Select(a => a.Valto).ToList();
             List<string> Tipusok = autok.Select(a => a.Tipus).ToList();
             List<int> Ulesszamok = autok.Select(a => a.UlesekSzama).ToList();
-           // List<int> Arak = autok.Select(a => a.Ar).ToList();
+          
 
             // Eredeti kiválasztott elemek mentése
             var selectedMarka = cBMarka.SelectedItem;
@@ -99,7 +91,7 @@ namespace CarRent
             var selectedValto = cBValto.SelectedItem;
             var selectedKivitel = cBKivitel.SelectedItem;
             var selectedUlesSzam = cBUles.SelectedItem;
-            //var selectedAr = cBAr.SelectedItem;
+           
 
             ComboBoxFeltoltes(cBMarka, Markak);
             ComboBoxFeltoltes(cBModell, Modellek);
@@ -108,35 +100,37 @@ namespace CarRent
             ComboBoxFeltoltes(cBValto, Valtok);
             ComboBoxFeltoltes(cBKivitel, Tipusok);
             ComboBoxFeltoltes(cBUles, Ulesszamok);
-            
 
-            if (selectedMarka != null && Markak.Contains(selectedMarka.ToString()))
+            if (true)
             {
-                cBMarka.SelectedItem = selectedMarka;
-            }
-            if (selectedModell != null && Modellek.Contains(selectedModell.ToString()))
-            {
-                cBModell.SelectedItem = selectedModell;
-            }
-            if (selectedEvjarat != null && Evjaratok.Contains((int)selectedEvjarat))
-            {
-                cBEvjarat.SelectedItem = selectedEvjarat;
-            }
-            if (selectedUzemanyag != null && Uzemanyagok.Contains(selectedUzemanyag.ToString()))
-            {
-                cBUzemanyag.SelectedItem = selectedUzemanyag;
-            }
-            if (selectedValto != null && Valtok.Contains(selectedValto.ToString()))
-            {
-                cBValto.SelectedItem = selectedValto;
-            }
-            if (selectedKivitel != null && Tipusok.Contains(selectedKivitel.ToString()))
-            {
-                cBKivitel.SelectedItem = selectedKivitel;
-            }
-            if (selectedUlesSzam != null && Ulesszamok.Contains((int)selectedUlesSzam))
-            {
-                cBUles.SelectedItem = selectedUlesSzam;
+                if (selectedMarka != null && Markak.Contains(selectedMarka.ToString()))
+                {
+                    cBMarka.SelectedItem = selectedMarka;
+                }
+                if (selectedModell != null && Modellek.Contains(selectedModell.ToString()))
+                {
+                    cBModell.SelectedItem = selectedModell;
+                }
+                if (selectedEvjarat != null && Evjaratok.Contains((int)selectedEvjarat))
+                {
+                    cBEvjarat.SelectedItem = selectedEvjarat;
+                }
+                if (selectedUzemanyag != null && Uzemanyagok.Contains(selectedUzemanyag.ToString()))
+                {
+                    cBUzemanyag.SelectedItem = selectedUzemanyag;
+                }
+                if (selectedValto != null && Valtok.Contains(selectedValto.ToString()))
+                {
+                    cBValto.SelectedItem = selectedValto;
+                }
+                if (selectedKivitel != null && Tipusok.Contains(selectedKivitel.ToString()))
+                {
+                    cBKivitel.SelectedItem = selectedKivitel;
+                }
+                if (selectedUlesSzam != null && Ulesszamok.Contains((int)selectedUlesSzam))
+                {
+                    cBUles.SelectedItem = selectedUlesSzam;
+                }
             }
         }
 
@@ -154,8 +148,35 @@ namespace CarRent
 
         public List<Auto> Lekerdezes()
         {
+            var kolcsonzes = from k in cn.Kolcsonzeseks
+                               select new
+                               {
+                                   k.FelhasznaloID,
+                                   k.AutoID,
+                                   k.Mettol,
+                                   k.Meddig
+                               };
+
+           
+
+            foreach (var item in kolcsonzes)
+            {
+                Kolcsonzes kolcs = new Kolcsonzes
+                {
+                    FelhasznaloId = item.FelhasznaloID,
+                    AutoId = item.AutoID,
+                    Mettol = item.Mettol,
+                    Meddig = item.Meddig
+                };
+
+                kolcsonzesek.Add(kolcs);
+            }
+
+            teszt.Content = kolcsonzesek[0].Meddig;
+
             var autok2 = from a in cn.Autoks
                          join m in cn.Markaks on a.MarkaID equals m.MarkaID
+                        
                          select new
                          {
                              a.AutoID,
@@ -167,7 +188,8 @@ namespace CarRent
                               a.Kivitel,
                              a.Ulesekszama,
                              a.Ar,
-                             a.Extraks
+                             a.Extraks,
+                            
                          };
 
 
@@ -187,10 +209,12 @@ namespace CarRent
                     UlesekSzama = item.Ulesekszama,
                     Ar = item.Ar,
                     Extrak = (List<Extrak>)item.Extraks,
+                    
 
-                   
-                  
                 };
+
+                
+
             foreach (var extrak in item.Extraks)
             {
                 auto.ExtrakNev.Add(extrak.ExtraNev); 
@@ -226,6 +250,8 @@ namespace CarRent
             public List<Extrak> Extrak { get; set; }
             public List<string> ExtrakNev { get; set; }
 
+            
+
 
             public Auto()
             {
@@ -233,7 +259,14 @@ namespace CarRent
             }
         }
 
+        public class Kolcsonzes
+        {
+            public DateTime Mettol { get; set; }
+            public DateTime Meddig { get; set; }
+            public int AutoId { get; set; }
+            public int FelhasznaloId { get; set; }
 
+        }
 
 
         private void cbSzurok_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -262,96 +295,6 @@ namespace CarRent
 
        
 
-        public List<Auto> Szures()
-        {
-            
-            string keresMarka = cBMarka.SelectedItem?.ToString();
-            string keresModell = cBModell.SelectedItem?.ToString();
-            string keresEvjarat = cBEvjarat.SelectedItem?.ToString();
-            string keresUzemanyag = cBUzemanyag.SelectedItem?.ToString();
-            string keresValto = cBValto.SelectedItem?.ToString();
-            string keresKivitel = cBKivitel.SelectedItem?.ToString();
-            string keresUlesSzam = cBUles.SelectedItem?.ToString();
-
-            var szurt = kocsik.Where(item =>
-                (keresMarka == null || item.Marka == keresMarka) &&
-                (keresModell == null || item.Modell == keresModell) &&
-                (keresEvjarat == null || item.Evjarat.ToString() == keresEvjarat) &&
-                (keresUzemanyag == null || item.Uzemanyag == keresUzemanyag) &&
-                (keresValto == null || item.Valto == keresValto) &&
-                (keresKivitel == null || item.Tipus == keresKivitel) &&
-                (keresUlesSzam == null || item.UlesekSzama.ToString() == keresUlesSzam)
-            ).ToList();
-
-
-            List<string> selectedItems = new List<string>();
-
-           
-            foreach (var comboBoxItem in cbSzurok.Items)
-            {
-                
-                if (comboBoxItem is CheckBoxItem item && item.IsChecked)
-                {
-                    
-                    selectedItems.Add(item.ExtraNev);
-                }
-            }
-
-
-            List<Auto> szurt2 = new List<Auto>();
-
-
-            if (selectedItems.Count > 0) {
-              szurt2 = szurt.Where(auto =>
-            {
-                
-                return selectedItems.All(kivEx => auto.ExtrakNev != null && auto.ExtrakNev.Any(ex => ex == kivEx));
-            }).ToList();
-
-            }
-            else
-            {
-                szurt2 = szurt;
-            }
-
-
-            List<Auto> szurt3 = new List<Auto>();
-
-            int a = 9999999;
-
-            if (tBAr.Text == "" || tBAr.Text == null)
-            {
-               
-                a = 9999999;
-            }
-            else
-            {
-                int.TryParse(tBAr.Text, out a);
-            }
-
-
-            foreach (var item in szurt2)
-            {
-               
-               
-               if (item.Ar <= a)
-                {
-                    szurt3.Add(item);
-                }
-            }
-
-
-
-
-            myListView.ItemsSource = szurt3;
-            ComboBoxolas(szurt3);
-
-
-            return szurt3;
-        }
-
-
-
         private void myListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (sender is ListView listView && listView.SelectedItem is Auto selectedCar)
@@ -366,17 +309,200 @@ namespace CarRent
             }
         }
 
+
+        public void Szuresek()
+        {
+
+            string keresMarka = cBMarka.SelectedItem?.ToString();
+            string keresModell = cBModell.SelectedItem?.ToString();
+            string keresEvjarat = cBEvjarat.SelectedItem?.ToString();
+            string keresUzemanyag = cBUzemanyag.SelectedItem?.ToString();
+            string keresValto = cBValto.SelectedItem?.ToString();
+            string keresKivitel = cBKivitel.SelectedItem?.ToString();
+            string keresUlesSzam = cBUles.SelectedItem?.ToString();
+            DateTime keresMettol;
+            if (dPMettol.SelectedDate == null)
+            {
+                keresMettol = DateTime.Parse("2888-01-01");
+            }
+            else
+            {
+                keresMettol = (DateTime)dPMettol.SelectedDate;
+            }
+
+            DateTime keresMeddig;
+            if (dPMeddig.SelectedDate == null)
+            {
+                keresMeddig = DateTime.Parse("1888-01-01");
+            }
+            else
+            {
+                keresMeddig = (DateTime)dPMeddig.SelectedDate;
+            }
+
+
+            var datum = kolcsonzesek.Where(item => item.Meddig < keresMettol).ToList();
+
+            teszt.Content = datum.Count;
+
+
+            var szurt = kocsik.Where(item =>
+             (keresMarka == null || item.Marka == keresMarka) &&
+             (keresModell == null || item.Modell == keresModell) &&
+              (keresEvjarat == null || item.Evjarat.ToString() == keresEvjarat) &&
+             (keresUzemanyag == null || item.Uzemanyag == keresUzemanyag) &&
+             (keresValto == null || item.Valto == keresValto) &&
+              (keresKivitel == null || item.Tipus == keresKivitel) &&
+              (keresUlesSzam == null || item.UlesekSzama.ToString() == keresUlesSzam) &&
+             (kolcsonzesek.Any(k => k.AutoId == item.Id && k.Meddig < keresMettol) || kolcsonzesek.Any(k => k.AutoId != item.Id) || kolcsonzesek.Any(k => k.AutoId == item.Id && k.Mettol > keresMeddig))
+            ).ToList();
+
+
+
+            List<string> selectedItems = new List<string>();
+
+
+            foreach (var comboBoxItem in cbSzurok.Items)
+            {
+
+                if (comboBoxItem is CheckBoxItem item && item.IsChecked)
+                {
+
+                    selectedItems.Add(item.ExtraNev);
+                }
+            }
+
+
+            List<Auto> szurt2 = new List<Auto>();
+
+
+            if (selectedItems.Count > 0)
+            {
+                szurt2 = szurt.Where(auto =>
+                {
+
+                    return selectedItems.All(kivEx => auto.ExtrakNev != null && auto.ExtrakNev.Any(ex => ex == kivEx));
+                }).ToList();
+
+            }
+            else
+            {
+                szurt2 = szurt;
+            }
+
+
+            List<Auto> szurt3 = new List<Auto>();
+
+            int a = 9999999;
+
+            if (tBAr.Text == "" || tBAr.Text == null)
+            {
+
+                a = 9999999;
+            }
+            else
+            {
+                int.TryParse(tBAr.Text, out a);
+            }
+
+
+            foreach (var item in szurt2)
+            {
+
+
+                if (item.Ar <= a)
+                {
+                    szurt3.Add(item);
+                }
+            }
+
+
+
+
+            myListView.ItemsSource = szurt3;
+            ComboBoxolas(szurt3);
+        }
         private void Szures(object sender, RoutedEventArgs e)
         {
-            Szures();
+            Szuresek();
         }
-
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new CarsPage());
         }
+
+
+
+
+
+        
+        TimeSpan kulonbseg;
+
+
+        private void dpMettol_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            mettol = dPMettol.SelectedDate.Value;
+
+            
+            if (mettol < DateTime.Today)
+            {
+                mettol = DateTime.Today;
+                dPMettol.SelectedDate = mettol;
+            }
+
+            if (meddig != DateTime.Parse("2888-01-01"))
+            {
+                if (mettol > meddig)
+                {
+                    teszt.Content = "ROSSZ";
+                }
+                else
+                {
+                    teszt.Content = "JÓ";
+
+                }
+
+            }
+
+            Szuresek();
+        }
+
+
+        private void dpMeddig_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            
+
+            meddig = dPMeddig.SelectedDate.Value;
+
+
+            if (meddig < DateTime.Today)
+            {
+                meddig = DateTime.Today;
+                dPMeddig.SelectedDate = meddig;
+            }
+
+            if (mettol != DateTime.Parse("1888-01-01"))
+            {
+                if (mettol > meddig)
+                {
+                    teszt.Content = "ROSSZ";
+                }
+                else
+                {
+                    teszt.Content = "JÓ";
+
+                }
+            }
+
+
+            Szuresek();
+
+
+        }
+
+        
     }
 }

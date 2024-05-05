@@ -22,6 +22,7 @@ namespace CarRent.KolcsonzoModel
 
         public Felhasznalok()
         {
+            this.Kolcsonzeseks = new List<Kolcsonzesek>();
             OnCreated();
         }
 
@@ -32,6 +33,8 @@ namespace CarRent.KolcsonzoModel
         public string Email { get; set; }
 
         public string Jelszo { get; set; }
+
+        public virtual IList<Kolcsonzesek> Kolcsonzeseks { get; set; }
 
         #region Extensibility Method Definitions
 

@@ -22,6 +22,7 @@ namespace CarRent.KolcsonzoModel
 
         public Autok()
         {
+            this.Kolcsonzeseks = new List<Kolcsonzesek>();
             this.Extraks = new List<Extrak>();
             OnCreated();
         }
@@ -51,6 +52,8 @@ namespace CarRent.KolcsonzoModel
         public virtual Kedvezmenyek Kedvezmenyek { get; set; }
 
         public virtual IList<Extrak> Extraks { get; set; }
+
+        public virtual IList<Kolcsonzesek> Kolcsonzeseks { get; set; }
 
         #region Extensibility Method Definitions
 

@@ -139,12 +139,14 @@ namespace CarRent.Context
 
         private void KolcsonzesekMapping(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Kolcsonzesek>().HasNoKey();
-            modelBuilder.Entity<Kolcsonzesek>().ToView(@"Kolcsonzesek", @"dbo");
+
+            modelBuilder.Entity<Kolcsonzesek>().ToTable(@"Kolcsonzesek", @"dbo");
+            modelBuilder.Entity<Kolcsonzesek>().Property(x => x.KolcsonzesID).HasColumnName(@"Kolcsonzes_ID").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd().HasPrecision(10, 0);
             modelBuilder.Entity<Kolcsonzesek>().Property(x => x.FelhasznaloID).HasColumnName(@"Felhasznalo_ID").HasColumnType(@"int").IsRequired().ValueGeneratedNever().HasPrecision(10, 0);
             modelBuilder.Entity<Kolcsonzesek>().Property(x => x.AutoID).HasColumnName(@"Auto_ID").HasColumnType(@"int").IsRequired().ValueGeneratedNever().HasPrecision(10, 0);
             modelBuilder.Entity<Kolcsonzesek>().Property(x => x.Mettol).HasColumnName(@"Mettol").HasColumnType(@"date").IsRequired().ValueGeneratedNever();
             modelBuilder.Entity<Kolcsonzesek>().Property(x => x.Meddig).HasColumnName(@"Meddig").HasColumnType(@"date").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<Kolcsonzesek>().HasKey(@"KolcsonzesID");
         }
 
         partial void CustomizeKolcsonzesekMapping(ModelBuilder modelBuilder);
@@ -222,16 +224,19 @@ namespace CarRent.Context
             modelBuilder.Entity<Markak>().HasMany(x => x.Autoks).WithOne(op => op.Markak).HasForeignKey(@"MarkaID").IsRequired(true);
 
             modelBuilder.Entity<Kedvezmenyek>().HasMany(x => x.Autoks).WithOne(op => op.Kedvezmenyek).HasForeignKey(@"KedvezmenyID").IsRequired(true);
-            modelBuilder.Entity<Extrak>().HasMany(x => x.Autoks).WithMany(op => op.Extraks)
+            modelBuilder.Entity<Autok>().HasMany(x => x.Kolcsonzeseks).WithOne(op => op.Autok).HasForeignKey(@"AutoID").IsRequired(true);
+            modelBuilder.Entity<Autok>().HasMany(x => x.Extraks).WithMany(op => op.Autoks)
                 .UsingEntity<Dictionary<string, object>>(
                     @"Extrak_Kapcsolo",
-                    x => x.HasOne<Autok>().WithMany().HasPrincipalKey(@"AutoID").HasForeignKey(@"Auto_ID"),
-                    x => x.HasOne<Extrak>().WithMany().HasPrincipalKey(@"ExtraID").HasForeignKey(@"Extra_ID")
+                    x => x.HasOne<Extrak>().WithMany().HasPrincipalKey(@"ExtraID").HasForeignKey(@"Extra_ID"),
+                    x => x.HasOne<Autok>().WithMany().HasPrincipalKey(@"AutoID").HasForeignKey(@"Auto_ID")
                 )
                 .ToTable(@"Extrak_Kapcsolo", @"dbo");
 
-            modelBuilder.Entity<Autok>().HasOne(x => x.Markak).WithMany(op => op.Autoks).HasForeignKey(@"MarkaID").IsRequired(true);
-            modelBuilder.Entity<Autok>().HasOne(x => x.Kedvezmenyek).WithMany(op => op.Autoks).HasForeignKey(@"KedvezmenyID").IsRequired(true);
+            modelBuilder.Entity<Felhasznalok>().HasMany(x => x.Kolcsonzeseks).WithOne(op => op.Felhasznalok).HasForeignKey(@"FelhasznaloID").IsRequired(true);
+
+            modelBuilder.Entity<Kolcsonzesek>().HasOne(x => x.Felhasznalok).WithMany(op => op.Kolcsonzeseks).HasForeignKey(@"FelhasznaloID").IsRequired(true);
+            modelBuilder.Entity<Kolcsonzesek>().HasOne(x => x.Autok).WithMany(op => op.Kolcsonzeseks).HasForeignKey(@"AutoID").IsRequired(true);
         }
 
         partial void CustomizeMapping(ref ModelBuilder modelBuilder);
