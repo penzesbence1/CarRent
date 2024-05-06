@@ -356,7 +356,7 @@ namespace CarRent
            
             var datum = kolcsonzesek.Where(item => item.Meddig < keresMettol || item.Mettol > keresMeddig).ToList();
 
-
+            teszt.Content = datum.Count;
 
             var szurt = kocsik.Where(item =>
              (keresMarka == null || item.Marka == keresMarka) &&

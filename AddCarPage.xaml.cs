@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRent.KolcsonzoModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -89,6 +90,29 @@ namespace CarRent
 
         private void btMegerosit_Click(object sender, RoutedEventArgs e)
         {
+
+            var kolcsid = from a in cn.Kolcsonzeseks
+                          select new
+                          {
+                             a.KolcsonzesID
+                          };
+
+            var maxId = kolcsid.Max(a => a.KolcsonzesID);
+
+            Kolcsonzesek kolcs = new Kolcsonzesek
+            {
+                KolcsonzesID = maxId+1,
+                FelhasznaloID = 4,
+                AutoID = kocsiid,   
+                Mettol = mettol,
+                Meddig = meddig
+
+
+            };
+
+            cn.Kolcsonzeseks.Add(kolcs);
+            cn.SaveChanges();
+
             NavigationService.Navigate(new RentedPage());
         }
     }
