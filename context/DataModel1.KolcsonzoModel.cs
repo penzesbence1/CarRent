@@ -50,7 +50,7 @@ namespace CarRent.Context
                  !optionsBuilder.Options.Extensions.Any(ext => !(ext is RelationalOptionsExtension) && !(ext is CoreOptionsExtension))))
             {
                 // optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-8KNRJ2L\SQLEXPRESS01;Initial Catalog=Kolcsonzo;Integrated Security=False;Persist Security Info=True;User ID=jozsi;Password=jozsi;TrustServerCertificate=True");
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-TOGTJ0R\\SQLEXPRESS;Initial Catalog=Kolcsonzo; Integrated Security = True; TrustServerCertificate = True");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-8KNRJ2L\\SQLEXPRESS01;Initial Catalog=Kolcsonzo; Integrated Security = True; TrustServerCertificate = True");
 
             }
             CustomizeConfiguration(ref optionsBuilder);

@@ -172,6 +172,7 @@ namespace CarRent
                 };
 
                 kolcsonzesek.Add(kolcs);
+               
             }
 
        
@@ -324,6 +325,7 @@ namespace CarRent
 
         public void Szuresek()
         {
+           
 
             string keresMarka = cBMarka.SelectedItem?.ToString();
             string keresModell = cBModell.SelectedItem?.ToString();
@@ -354,20 +356,21 @@ namespace CarRent
             }
 
            
-            var datum = kolcsonzesek.Where(item => item.Meddig < keresMettol || item.Mettol > keresMeddig).ToList();
-
-            teszt.Content = datum.Count;
-
+            
             var szurt = kocsik.Where(item =>
-             (keresMarka == null || item.Marka == keresMarka) &&
-             (keresModell == null || item.Modell == keresModell) &&
-              (keresEvjarat == null || item.Evjarat.ToString() == keresEvjarat) &&
-             (keresUzemanyag == null || item.Uzemanyag == keresUzemanyag) &&
-             (keresValto == null || item.Valto == keresValto) &&
-              (keresKivitel == null || item.Tipus == keresKivitel) &&
-              (keresUlesSzam == null || item.UlesekSzama.ToString() == keresUlesSzam) &&
-             (kolcsonzesek.Any(k => k.AutoId == item.Id && k.Meddig < keresMettol) || kolcsonzesek.Any(k => k.AutoId != item.Id) || kolcsonzesek.Any(k => k.AutoId == item.Id && k.Mettol > keresMeddig))
-            ).ToList();
+    (keresMarka == null || item.Marka == keresMarka) &&
+    (keresModell == null || item.Modell == keresModell) &&
+    (keresEvjarat == null || item.Evjarat.ToString() == keresEvjarat) &&
+    (keresUzemanyag == null || item.Uzemanyag == keresUzemanyag) &&
+    (keresValto == null || item.Valto == keresValto) &&
+    (keresKivitel == null || item.Tipus == keresKivitel) &&
+    (keresUlesSzam == null || item.UlesekSzama.ToString() == keresUlesSzam)&&
+         (!kolcsonzesek.Any(k => k.AutoId == item.Id) ||
+    kolcsonzesek.Where(k => k.AutoId == item.Id).All(k =>
+        k.Mettol > keresMeddig || k.Meddig < keresMettol)))
+    .ToList();
+
+
 
 
 
