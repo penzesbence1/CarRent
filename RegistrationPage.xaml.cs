@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRent.KolcsonzoModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -22,12 +23,16 @@ namespace CarRent
     /// </summary>
     public partial class RegistrationPage : Page
     {
+        CarRent.Context.KolcsonzoModel cn;
         public RegistrationPage()
         {
             InitializeComponent();
+            cn = new CarRent.Context.KolcsonzoModel();
+
+            txJelszo.Content = "Jelszó";
         }
 
-        public string PlaceholderText { get; set; }
+
 
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -87,67 +92,99 @@ namespace CarRent
             mainWindow.mainFrame.Navigate(new Uri("LoginPage.xaml", UriKind.Relative));
         }
 
+
+
+
+        // Felhasználónév és jelszó ellenőrzése
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-
-            static bool IsEmailValid(string email)
-            {
-                var valid = true;
-
-                try
-                {
-                    var emailAddress = new MailAddress(email);
-                }
-                catch
-                {
-                    valid = false;
-                }
-
-                return valid;
-            }
-
+            // Ellenőrizzük az e-mail cím formátumát
             string email = textBox3.Text;
             string username = textBox1.Text;
             string pass = textBox2.Password;
 
             if (IsEmailValid(email))
             {
-                lbError.Content = "Jó.";
+                // Ellenőrizzük, hogy a felhasználónév és a jelszó meg vannak-e adva
+                if (textBox1.Text == "Felhasználónév" || txJelszo.Content == "Jelszó")
+                {
+                    lbError.Content = "Adjon meg felhasználónevet és jelszót!";
+                }
+                else
+                {
+
+                    // Ellenőrizzük, hogy a felhasználónév már létezik-e az adatbázisban
+                    if (cn.Felhasznaloks.Any(f => f.Felhasznalonev == username))
+                    {
+                        lbError.Content = "A megadott felhasználónév már létezik!";
+                    }
+                    else
+                    {
+                        // Jelszó titkosítása SHA256-algoritmus használatával
+                        using (SHA256 sha256Hash = SHA256.Create())
+                        {
+                            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+                            StringBuilder builder = new StringBuilder();
+                            for (int i = 0; i < bytes.Length; i++)
+                            {
+                                builder.Append(bytes[i].ToString("x2"));
+                            }
+                            pass = builder.ToString();
+                        }
+
+                        // Új felhasználó létrehozása és hozzáadása az adatbázishoz
+                        Felhasznalok ujFelhasznalo = new Felhasznalok
+                        {
+                            Felhasznalonev = username,
+                            Email = email,
+                            Jelszo = pass
+                        };
+
+                        cn.Felhasznaloks.Add(ujFelhasznalo);
+                        cn.SaveChanges();
+
+                        lbError.Content = "Sikeres regisztráció!";
+                        int userid = ujFelhasznalo.FelhasznaloID;
+                        lbError.Content = $"Az újonnan létrehozott felhasználó ID-ja: {userid}";
+
+
+                        var mainWindow = (MainWindow)Application.Current.MainWindow;
+                        mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
+                        mainWindow.Height = 650;
+                        mainWindow.MinWidth = 800;
+                        mainWindow.MinHeight = 500;
+                        NavigationService.Navigate(new HomePage(userid));
+                    }
+
+                }
             }
             else
             {
                 lbError.Content = "Hibás email formátum!";
             }
-
-
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
-
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                pass = builder.ToString();
-            }
-
-            lbError.Content = pass + " " + email + " " + username;
-
-
-
-
-            //var mainWindow = (MainWindow)Application.Current.MainWindow;
-            // mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
-            // mainWindow.Height = 650;
-            // mainWindow.MinWidth = 800;
-            // mainWindow.MinHeight = 500;
-
-            //mainWindow.mainFrame.Navigate(new HomePage());
         }
 
-        private void textBox2_GotFocus(object sender, RoutedEventArgs e)
+       
+        private static bool IsEmailValid(string email)
+        {
+            var valid = true;
+
+            try
+            {
+                var emailAddress = new MailAddress(email);
+            }
+            catch
+            {
+                valid = false;
+            }
+
+            return valid;
+        }
+    
+
+
+
+    private void textBox2_GotFocus(object sender, RoutedEventArgs e)
         {
             
             txJelszo.Content = "";

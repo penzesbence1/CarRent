@@ -133,7 +133,7 @@ namespace CarRent
             }
             else
             {
-                mainWindow.mainFrame.Navigate(new HomePage(user));
+                mainWindow.mainFrame.Navigate(new HomePage(1));
             }
             
         }

@@ -22,12 +22,19 @@ namespace CarRent
    
     public partial class HomePage : Page
     {
-       
-        public HomePage(string user)
+        CarRent.Context.KolcsonzoModel cn;
+        public HomePage(int user)
         {
+            cn = new CarRent.Context.KolcsonzoModel();
+
+
             InitializeComponent();
-            lbUser.Content = user;
+            
             Main.Content = new StartingPage();
+
+            var felhasznalo =  cn.Felhasznaloks.FirstOrDefault(u => u.FelhasznaloID == user);
+
+            lbUser.Content = felhasznalo.Felhasznalonev.ToString();
         }
 
         private void MyLabel_MouseEnter(object sender, MouseEventArgs e)
