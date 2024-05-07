@@ -71,11 +71,11 @@ namespace CarRent
                     break;
 
                 case "lbAuto":
-                    Main.Content = new CarsPage();
+                    Main.Content = new CarsPage(13);
                     break;
 
                 case "lbRendeles":
-                    Main.Content = new RentedPage();
+                    Main.Content = new RentedPage(4);
                     break;
 
                 case "lbLogout":

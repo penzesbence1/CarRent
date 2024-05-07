@@ -143,9 +143,9 @@ namespace CarRent
                         cn.Felhasznaloks.Add(ujFelhasznalo);
                         cn.SaveChanges();
 
-                        lbError.Content = "Sikeres regisztráció!";
+                        
                         int userid = ujFelhasznalo.FelhasznaloID;
-                        lbError.Content = $"Az újonnan létrehozott felhasználó ID-ja: {userid}";
+                       
 
 
                         var mainWindow = (MainWindow)Application.Current.MainWindow;

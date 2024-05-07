@@ -18,7 +18,7 @@
         
         <TextBox x:Name="textBox1" HorizontalAlignment="Center" Height="25" Margin="0,230,0,0" 
                  TextWrapping="Wrap" Text="Felhasználónév" VerticalAlignment="Top" Width="300" 
-                 Opacity="0.5" FontSize="18" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"
+                 Opacity="0.5" FontSize="18" GotFocus="TextBox_GotFocus"
                  LostFocus="TextBox_LostFocus"/>
 
 

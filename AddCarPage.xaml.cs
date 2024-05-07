@@ -23,26 +23,28 @@ namespace CarRent
     {
 
         CarRent.Context.KolcsonzoModel cn;
+
+        public int activeuser;
         public int kocsiid;
         public int ara;
         public DateTime mettol;
         public DateTime meddig;
-        public AddCarPage(int id, DateTime mettolx, DateTime meddigx)
+        public AddCarPage(int userid, int kocsiid, DateTime mettolx, DateTime meddigx)
         {
-
+            activeuser = userid;
             mettol = mettolx;
 
             meddig = meddigx;
 
 
-            this.kocsiid = id;
+            this.kocsiid = kocsiid;
 
 
             InitializeComponent();
 
             Label label = FindName("Kocsi") as Label;
 
-
+            
             cn = new CarRent.Context.KolcsonzoModel();
 
 
@@ -83,7 +85,7 @@ namespace CarRent
 
         private void btMegse_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CarsPage());
+            NavigationService.Navigate(new CarsPage(activeuser));
         }
 
        
@@ -95,7 +97,7 @@ namespace CarRent
             Kolcsonzesek kolcs = new Kolcsonzesek
             {
                
-                FelhasznaloID = 4,
+                FelhasznaloID = activeuser,
                 AutoID = kocsiid,   
                 Mettol = mettol,
                 Meddig = meddig
@@ -106,7 +108,7 @@ namespace CarRent
             cn.Kolcsonzeseks.Add(kolcs);
             cn.SaveChanges();
 
-            NavigationService.Navigate(new RentedPage());
+            NavigationService.Navigate(new RentedPage(activeuser));
         }
     }
 }

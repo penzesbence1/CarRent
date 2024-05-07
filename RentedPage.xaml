@@ -26,7 +26,7 @@
                    VerticalAlignment="Top" Width="82"
                    Margin="0,0,0,0"
                    Source="/carrenticon-rbg.png"/>
-        <Label Content="CarRental" HorizontalAlignment="Center" Foreground="Black" 
+        <Label Content="CarRental" x:Name="lBCim" HorizontalAlignment="Center" Foreground="Black" 
                   VerticalAlignment="Center" 
                    FontWeight="Bold" FontSize="16" Grid.Row="0" 
                    Margin="0,40,0,0"/>

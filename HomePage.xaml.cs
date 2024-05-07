@@ -23,10 +23,11 @@ namespace CarRent
     public partial class HomePage : Page
     {
         CarRent.Context.KolcsonzoModel cn;
+        int activeuser;
         public HomePage(int user)
         {
             cn = new CarRent.Context.KolcsonzoModel();
-
+            activeuser = user;
 
             InitializeComponent();
             
@@ -81,11 +82,12 @@ namespace CarRent
                     break;
 
                 case "lbAuto":
-                    Main.Content = new CarsPage();
+                    Main.Content = new CarsPage(activeuser);
                     break;
 
                 case "lbRendeles":
-                    Main.Content = new RentedPage();
+                    
+                    Main.Content = new RentedPage(activeuser);
                     break;
 
                 case "lbLogout":

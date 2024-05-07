@@ -35,12 +35,12 @@ namespace CarRent
         public List<CheckBoxItem> extrak = new List<CheckBoxItem>();
         public DateTime mettol;
         public DateTime meddig;
-
-        public CarsPage()
+        public int activeuser;
+        public CarsPage(int id)
         {
             InitializeComponent();
 
-
+            activeuser = id;
             cn = new CarRent.Context.KolcsonzoModel();
 
 
@@ -308,7 +308,7 @@ namespace CarRent
                 
                 int carId = selectedCar.Id;
 
-                NavigationService.Navigate(new AddCarPage(carId, mettol, meddig));
+                NavigationService.Navigate(new AddCarPage(activeuser, carId, mettol, meddig));
                 }
                 else
                 {
@@ -444,7 +444,7 @@ namespace CarRent
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CarsPage());
+            NavigationService.Navigate(new CarsPage(activeuser));
         }
 
 

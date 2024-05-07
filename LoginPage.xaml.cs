@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRent.KolcsonzoModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -21,9 +22,13 @@ namespace CarRent
     /// </summary>
     public partial class LoginPage : Page
     {
+        CarRent.Context.KolcsonzoModel cn;
         public LoginPage()
         {
-           
+
+            
+            cn = new CarRent.Context.KolcsonzoModel();
+
 
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.Height = 600;
@@ -92,13 +97,9 @@ namespace CarRent
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+
             var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
-            mainWindow.Height = 650;
-            mainWindow.MinWidth = 800;
-            mainWindow.MinHeight = 500;
-
-
 
 
             string user = textBox1.Text;
@@ -133,15 +134,46 @@ namespace CarRent
             }
             else
             {
-                mainWindow.mainFrame.Navigate(new HomePage(1));
+
+                var felhasznalok = (from f in cn.Felhasznaloks
+                                   where f.Felhasznalonev == user && f.Jelszo == pass
+                                   select new
+                                   {
+                                       f.FelhasznaloID
+                                   }).FirstOrDefault();
+
+
+                if (felhasznalok != null)
+                {
+                    
+                    mainWindow.Width = 1000; // ablak szélességének beállítása 1000-re
+                    mainWindow.Height = 650;
+                    mainWindow.MinWidth = 800;
+                    mainWindow.MinHeight = 500;
+                    // Felhasználó megtalálva
+                    mainWindow.mainFrame.Navigate(new HomePage(felhasznalok.FelhasznaloID));
+
+                    
+                }
+                else
+                {
+                    textBox1.Opacity = 0.5;
+                    textBox1.Text="Felhasználónév";
+                    textBox2.Clear();
+                    textBox2.Opacity = 0.5;
+                    txJelszo.Content = "Jelszó";
+                    
+
+                    // Felhasználó nem található
+                    lbError.Content = "Hibás felhasználónév vagy jelszó!";
+                }
+
+                
             }
             
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        
         private void MouseClick(object sender, MouseButtonEventArgs e)
         {
 
