@@ -71,7 +71,7 @@ namespace CarRent
                     break;
 
                 case "lbAuto":
-                    Main.Content = new CarsPage(13);
+                    Main.Content = new AdminCarPage();
                     break;
 
                 case "lbRendeles":
