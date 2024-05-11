@@ -126,7 +126,6 @@ namespace CarRent
             public int Kedvezmeny { get; set; }
             public List<Extrak> Extrak { get; set; }
             public string ExtrakNev { get; set; }
-
         }
 
         }

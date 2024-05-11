@@ -258,5 +258,6 @@ namespace CarRent.Context
 
         partial void OnCreated();
 
+        
     }
 }

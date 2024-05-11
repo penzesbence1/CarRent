@@ -152,7 +152,7 @@ namespace CarRent
                 Kolcsonzes kolcs = new Kolcsonzes
                 {
                     FelhasznaloId = item.FelhasznaloID,
-                    AutoId = item.AutoID,
+                    AutoId = item.AutoID ?? 0,
                     Mettol = item.Mettol,
                     Meddig = item.Meddig
                 };
@@ -386,6 +386,12 @@ namespace CarRent
             myListView.ItemsSource = szurt3;
             ComboBoxolas(szurt3);
         }
+
+        private void btHozzaadas_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new InsertCarPage());
+        }
+
         private void Szures(object sender, RoutedEventArgs e)
         {
             Szuresek();

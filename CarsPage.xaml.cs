@@ -166,7 +166,7 @@ namespace CarRent
                 Kolcsonzes kolcs = new Kolcsonzes
                 {
                     FelhasznaloId = item.FelhasznaloID,
-                    AutoId = item.AutoID,
+                    AutoId = item.AutoID ?? 0,
                     Mettol = item.Mettol,
                     Meddig = item.Meddig
                 };

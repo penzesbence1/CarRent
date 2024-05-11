@@ -22,6 +22,7 @@ namespace CarRent
     /// </summary>
     public partial class CarDeleteConfirmPage : Page
     {
+        public int extraID;
         public int kocsiid;
         CarRent.Context.KolcsonzoModel cn;
         public CarDeleteConfirmPage(int kocsiid)
@@ -41,9 +42,15 @@ namespace CarRent
                               m.MarkaNev,
                               a.Modell,
                               a.Evjarat,
+                              a.Extraks
                           };
 
             var elsoAuto = dbautok.FirstOrDefault();
+
+            foreach (var item in elsoAuto.Extraks)
+            {
+                extraID = item.ExtraID;
+            }
 
             lbKocsi.Content = $"Biztos kiszeretnéd törölni a(z) {elsoAuto?.MarkaNev} {elsoAuto?.Modell} ( {elsoAuto?.Evjarat} ) autót?";
 
@@ -55,23 +62,41 @@ namespace CarRent
             NavigationService.Navigate(new EditCarPage(kocsiid));
         }
 
+        public class Kolcsonzes
+        {
+            
+        }
 
+        public class Extrak_Kapcsolo
+        {
+            public int AutoID { get; set; }
+            public int ExtraID { get; set; }
+
+            public Autok Auto { get; set; }
+            public Extrak Extra { get; set; }
+        }
+
+        public class KolcsonzoModel : DbContext
+        {
+            // other DbSet properties
+
+            public DbSet<Extrak_Kapcsolo> Extrak_Kapcsolos { get; set; }
+
+            // other code
+        }
 
         private void btMegerosit_Click(object sender, RoutedEventArgs e)
         {
             var auto = cn.Autoks.FirstOrDefault(a => a.AutoID == kocsiid);
+            var extra = cn.Extraks.FirstOrDefault(e => e.ExtraID == extraID);
             var kolcsonzes = cn.Kolcsonzeseks.FirstOrDefault(k => k.AutoID == kocsiid);
+
 
             if (auto != null)
             {
-                // Töröld az autót az adatbázisból
-                //cn.Kolcsonzeseks.Remove(kolcsonzes);
+                cn.Kolcsonzeseks.Remove(kolcsonzes);
                 cn.Autoks.Remove(auto);
-
-                // Mentsd el a változtatásokat az adatbázisban
                 cn.SaveChanges();
-
-                // Visszatérhetsz az AdminCarPage-re vagy bármely más oldalra, amit meg szeretnél jeleníteni
                 NavigationService.Navigate(new AdminCarPage());
             }
 

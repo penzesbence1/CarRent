@@ -31,7 +31,7 @@ namespace CarRent.KolcsonzoModel
 
         public int FelhasznaloID { get; set; }
 
-        public int AutoID { get; set; }
+        public int? AutoID { get; set; }
 
         public DateTime Mettol { get; set; }
 

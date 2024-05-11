@@ -75,8 +75,15 @@
 
                         </GridView>
                     </ListView.View>
-                </ListView>
 
+                </ListView>
+                <Button x:Name="btHozzaadas" Content="Hozzáadás" HorizontalAlignment="Center"
+                Height="35" Margin="0,342,0,0" VerticalAlignment="Top" 
+                Width="150" FontFamily="Segoe UI Semibold"
+                FontWeight="Bold" FontSize="16" Background="DarkGreen"
+                Foreground="#FFE3E3E3" 
+                Opacity="1" Click="btHozzaadas_Click"    
+                />
             </Grid>
         </Grid>
 
