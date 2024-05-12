@@ -158,10 +158,8 @@ namespace CarRent
 
                 }
             }
-            else
-            {
-                lbError.Content = "Hibás email formátum!";
-            }
+            else lbError.Content = "Hibás email formátum!";
+
         }
 
        

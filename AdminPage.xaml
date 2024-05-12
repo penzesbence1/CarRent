@@ -47,7 +47,7 @@
                    Height="60" Width="200" MouseEnter="MyLabel_MouseEnter" 
                    MouseLeftButtonUp="Megnyit" 
                    MouseLeave="MyLabel_MouseLeave"/>
-                <Label x:Name="lbAutoM" Content="Felhasználók&#10;módosítása" 
+                <Label x:Name="lbFelhasznalo" Content="Felhasználók&#10;módosítása" 
                  VerticalContentAlignment="Center" 
                 HorizontalContentAlignment="Center" 
                 HorizontalAlignment="Center" Foreground="AntiqueWhite"

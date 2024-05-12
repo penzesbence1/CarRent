@@ -91,10 +91,17 @@ namespace CarRent
             var extra = cn.Extraks.FirstOrDefault(e => e.ExtraID == extraID);
             var kolcsonzes = cn.Kolcsonzeseks.FirstOrDefault(k => k.AutoID == kocsiid);
 
+            if (kolcsonzes != null)
+            {
+
+                cn.Kolcsonzeseks.Remove(kolcsonzes);
+                cn.SaveChanges();
+            }
+            
 
             if (auto != null)
             {
-                cn.Kolcsonzeseks.Remove(kolcsonzes);
+                
                 cn.Autoks.Remove(auto);
                 cn.SaveChanges();
                 NavigationService.Navigate(new AdminCarPage());

@@ -51,12 +51,7 @@ namespace CarRent
                               k.KedvezmenyErteke,
                               a.Extraks
                           };
-            /*var dbextrak = from e in cn.Extraks
-                           join cn.
-                           select new
-                           {
-                               e.ExtraNev
-                           };*/
+            
             elsoAuto = dbautok.FirstOrDefault();
             string extrak = "";
 
