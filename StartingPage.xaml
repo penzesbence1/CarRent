@@ -45,33 +45,95 @@
                 </Grid.RowDefinitions>
 
                 <Image Source="/img/bmw.png" Grid.Row="0" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
+                <Border BorderBrush="{x:Null}" Grid.Row="0" Background="#FFACCDF0" CornerRadius="10" Margin="10" HorizontalAlignment="Right" Width="240" Height="110">
 
-                <ListView x:Name="bmwlist"  Grid.Row="0" HorizontalAlignment="Left" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}" Margin="170,44,0,44">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
-                            <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
-                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
-                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
-                            <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                    <ListView x:Name="bmwlist" Grid.Row="0" HorizontalAlignment="Right" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}" Background="{x:Null}" FontFamily="Impact" Foreground="#FF001856" BorderBrush="{x:Null}" FontSize="14" VerticalAlignment="Top">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="50" Header="Modell" DisplayMemberBinding="{Binding Modell}" >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="{x:Null}"/>
+                                            <Setter Property="BorderBrush" Value="{x:Null}"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="45" Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="80" Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="55" Header="Ár" DisplayMemberBinding="{Binding Ar}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
 
                 <Image Source="/img/ford.png" Grid.Row="1" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
 
-                <ListView x:Name="fordlist" Grid.Row="1" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
-                            <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
-                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
-                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
-                            <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <Border BorderBrush="{x:Null}" Grid.Row="1" Background="#FFACCDF0" CornerRadius="10" Margin="10" HorizontalAlignment="Right" Width="240" Height="110">
 
+                    <ListView x:Name="fordlist" Grid.Row="1" HorizontalAlignment="Right" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}" Background="#FFACCDF0" FontFamily="Impact" Foreground="#FF001856" BorderBrush="{x:Null}" FontSize="14">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="50" Header="Modell" DisplayMemberBinding="{Binding Modell}" >
+                                <GridViewColumn.HeaderContainerStyle>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                    </Style>
+                                </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="45" Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="80" Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="55" Header="Ár" DisplayMemberBinding="{Binding Ar}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
             </Grid>
 
             <Grid Grid.Column="1">
@@ -83,31 +145,95 @@
 
                 <Image Source="/img/volkswagen.png" Grid.Row="0" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
 
-                <ListView x:Name="vwlist" Grid.Row="0" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
-                            <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
-                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
-                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
-                            <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <Border BorderBrush="{x:Null}" Grid.Row="0" Background="#FFACCDF0" CornerRadius="10" Margin="10" HorizontalAlignment="Right" Width="240" Height="110">
+
+                    <ListView x:Name="vwlist" Grid.Row="0" HorizontalAlignment="Right" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}" Background="#FFACCDF0" FontFamily="Impact" Foreground="#FF001856" BorderBrush="{x:Null}" FontSize="14">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="50" Header="Modell" DisplayMemberBinding="{Binding Modell}" >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="45" Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="80" Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="55" Header="Ár" DisplayMemberBinding="{Binding Ar}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
 
                 <Image Source="/img/honda.png" Grid.Row="1" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
 
-                <ListView x:Name="hondalist" Grid.Row="1" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
-                            <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
-                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
-                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
-                            <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <Border BorderBrush="{x:Null}" Grid.Row="1" Background="#FFACCDF0" CornerRadius="10" Margin="10" HorizontalAlignment="Right" Width="240" Height="110">
+
+                    <ListView x:Name="hondalist" Grid.Row="1" HorizontalAlignment="Right" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}" Background="#FFACCDF0" FontFamily="Impact" Foreground="#FF001856" BorderBrush="{x:Null}" FontSize="14">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="50" Header="Modell" DisplayMemberBinding="{Binding Modell}" >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="45" Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="80" Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <GridViewColumn Width="55" Header="Ár" DisplayMemberBinding="{Binding Ar}"  >
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                </GridViewColumn>
+                                <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
 
             </Grid>
 
