@@ -94,7 +94,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Width="600">
-                <Label x:Name="lbKedvezmeny" MinWidth="130" Margin="0,0,10,0" HorizontalContentAlignment="Left" Content="Kedvezmeny:" HorizontalAlignment="Left" 
+                <Label x:Name="lbKedvezmeny" MinWidth="130" Margin="0,0,10,0" HorizontalContentAlignment="Left" Content="Kedvezmény:" HorizontalAlignment="Left" 
                VerticalAlignment="Center" 
                    FontSize="18" 
                FontWeight="Bold" Foreground="#FF08568A"/>
@@ -108,7 +108,7 @@
                />
             </StackPanel>
 
-            <Button x:Name="btHozzaadas" Content="Hozzáadas" HorizontalAlignment="Center"
+            <Button x:Name="btHozzaadas" Content="Hozzáadás" HorizontalAlignment="Center"
                 Height="35" Margin="200,50,0,0" VerticalAlignment="Top" 
                 Width="150" FontFamily="Segoe UI Semibold"
                 FontWeight="Bold" FontSize="16" Background="DarkGreen"

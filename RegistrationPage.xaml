@@ -47,7 +47,8 @@
                 Height="35" Margin="0,385,0,0" VerticalAlignment="Top" 
                 Width="150" FontFamily="Segoe UI Semibold"
                 FontWeight="Bold" FontSize="16" Background="#FF01266C"
-                Foreground="#FFE3E3E3" Click="Button_Click" />
+                Foreground="#FFE3E3E3" Click="Button_Click" MouseEnter="Button_MouseEnter"
+                MouseLeave="Button_MouseLeave"/>
         
         <Label Content="Már van fiókom" HorizontalAlignment="Center" 
                Height="25" Margin="0,425,0,0" VerticalAlignment="Top" 
