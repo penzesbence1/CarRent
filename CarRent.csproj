@@ -9,11 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="bmw.png" />
     <None Remove="carIcon.png" />
     <None Remove="carrenticon-rbg.png" />
     <None Remove="carrenticon.jpg" />
     <None Remove="image-removebg-preview.png" />
+    <None Remove="img\bmw.png" />
     <None Remove="img\carrenticon.jpg" />
+    <None Remove="img\ford.png" />
+    <None Remove="img\honda.png" />
+    <None Remove="img\volkswagen.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,11 +27,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="bmw.png" />
     <Resource Include="carIcon.png" />
     <Resource Include="carrenticon-rbg.png" />
     <Resource Include="carrenticon.jpg" />
     <Resource Include="image-removebg-preview.png" />
+    <Resource Include="img\bmw.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\carrenticon.jpg" />
+    <Resource Include="img\ford.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\honda.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\volkswagen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
