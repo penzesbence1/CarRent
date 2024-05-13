@@ -45,8 +45,25 @@
                         <GridViewColumn Header="Váltó" Width="75" DisplayMemberBinding="{Binding Valto}" />
                         <GridViewColumn Header="Típus" Width="75" DisplayMemberBinding="{Binding Tipus}" />
                         <GridViewColumn Header="Ülések száma" Width="75" DisplayMemberBinding="{Binding UlesekSzama}" />
-                        <GridViewColumn Header="Ár" Width="75" DisplayMemberBinding="{Binding Ar}" />
+                        
+                        <GridViewColumn Header="Mettől" Width="75" >
+                                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Mettol, StringFormat='yyyy-MM-dd'}"/>
+                            </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
+                        <GridViewColumn Header="Meddig" Width="75" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Meddig, StringFormat='yyyy-MM-dd'}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        
+                        
+                        <GridViewColumn Header="Ár" Width="75" DisplayMemberBinding="{Binding Ar}" />
                     </GridView>
                 </ListView.View>
             </ListView>

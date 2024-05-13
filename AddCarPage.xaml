@@ -60,7 +60,9 @@
                 Width="150" FontFamily="Segoe UI Semibold"
                 FontWeight="Bold" FontSize="16" Background="DarkGreen"
                 Foreground="#FFE3E3E3" 
-                Opacity="1" Click="btMegerosit_Click"    
+                Opacity="1" Click="btMegerosit_Click"  
+                    MouseEnter="Button_MouseEnter"
+                    MouseLeave="Button_MouseLeave"
                 />
 
             <Button x:Name="btMegse" Content="Mégse" HorizontalAlignment="Center"
@@ -68,7 +70,9 @@
                 Width="150" FontFamily="Segoe UI Semibold"
                 FontWeight="Bold" FontSize="16" Background="DarkRed"
                 Foreground="#FFE3E3E3" 
-                Opacity="1" Click="btMegse_Click"/>
+                Opacity="1" Click="btMegse_Click"
+                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
+                    />
 
         </StackPanel>
 

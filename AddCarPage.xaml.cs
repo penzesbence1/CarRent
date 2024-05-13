@@ -111,5 +111,25 @@ namespace CarRent
 
             NavigationService.Navigate(new RentedPage(activeuser));
         }
+
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+            Cursor = Cursors.Hand;
+
+
+
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+
+            Cursor = Cursors.Arrow;
+
+
+        }
+
     }
 }

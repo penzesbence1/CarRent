@@ -76,7 +76,10 @@ namespace CarRent
                              a.Ulesekszama,
                              a.Ar,
                              a.Extraks,
+                             kocsi.Mettol,
+                             kocsi.Meddig,
                              Kikolcsonzve = true, // Minden autóhoz tartozik kölcsönzés, ha benne van a kolcsonzesek listában
+                             
                             
                          };
 
@@ -95,13 +98,24 @@ namespace CarRent
                     Valto = item.Valto,
                     Tipus = item.Kivitel,
                     UlesekSzama = item.Ulesekszama,
-                    Ar = item.Ar,
+
                     Extrak = (List<Extrak>)item.Extraks,
+                    Mettol = item.Mettol,
+                    Meddig = item.Meddig,
+
+
+
+                Ar = item.Ar * 500,
 
 
                 };
 
+                TimeSpan kulonbseg = auto.Meddig.Subtract(auto.Mettol);
 
+                int napok = kulonbseg.Days +1 ;
+
+                // Auto árának beállítása
+                auto.Ar = item.Ar * napok;
 
                 foreach (var extrak in item.Extraks)
                 {
@@ -137,6 +151,10 @@ namespace CarRent
             public string Tipus { get; set; }
             public int UlesekSzama { get; set; }
             public int Ar { get; set; }
+
+            public DateTime Mettol { get; set; }
+            public DateTime Meddig { get; set; }
+
 
             public List<Extrak> Extrak { get; set; }
             public List<string> ExtrakNev { get; set; }
