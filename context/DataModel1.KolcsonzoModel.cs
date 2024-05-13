@@ -50,7 +50,7 @@ namespace CarRent.Context
                  !optionsBuilder.Options.Extensions.Any(ext => !(ext is RelationalOptionsExtension) && !(ext is CoreOptionsExtension))))
             {
                 // optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-8KNRJ2L\SQLEXPRESS01;Initial Catalog=Kolcsonzo;Integrated Security=False;Persist Security Info=True;User ID=jozsi;Password=jozsi;TrustServerCertificate=True");
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-8KNRJ2L\\SQLEXPRESS01;Initial Catalog=Kolcsonzo; Integrated Security = True; TrustServerCertificate = True");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-TOGTJ0R\\SQLEXPRESS;Initial Catalog=Kolcsonzo; Integrated Security = True; TrustServerCertificate = True");
 
             }
             CustomizeConfiguration(ref optionsBuilder);
@@ -119,6 +119,16 @@ namespace CarRent.Context
 
             RelationshipsMapping(modelBuilder);
             CustomizeMapping(ref modelBuilder);
+
+            modelBuilder.Entity<Autok>()
+            .HasMany(a => a.Extraks)
+            .WithMany(e => e.Autoks)
+            .UsingEntity<Dictionary<string, object>>(
+            "Extrak_Kapcsolo",
+            a => a.HasOne<Extrak>().WithMany().HasForeignKey("Extra_ID").OnDelete(DeleteBehavior.Cascade),
+            e => e.HasOne<Autok>().WithMany().HasForeignKey("Auto_ID").OnDelete(DeleteBehavior.Cascade)
+    );
+
         }
 
         #region Markak Mapping
@@ -218,7 +228,7 @@ namespace CarRent.Context
         partial void CustomizeAutokMapping(ModelBuilder modelBuilder);
 
         #endregion
-
+        
         private void RelationshipsMapping(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Markak>().HasMany(x => x.Autoks).WithOne(op => op.Markak).HasForeignKey(@"MarkaID").IsRequired(true);
@@ -247,5 +257,7 @@ namespace CarRent.Context
         }
 
         partial void OnCreated();
+
+        
     }
 }

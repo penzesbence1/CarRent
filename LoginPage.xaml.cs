@@ -130,6 +130,10 @@ namespace CarRent
 
             if (user == "admin" && pass == adminpass)
             {
+                mainWindow.Width = 1000;
+                mainWindow.Height = 650;
+                mainWindow.MinWidth = 800;
+                mainWindow.MinHeight = 500;
                 mainWindow.mainFrame.Navigate(new AdminPage(user));
             }
             else
