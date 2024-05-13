@@ -513,10 +513,13 @@ namespace CarRent
                 }
                 else
                 {
-                    mettol = dPMettol.SelectedDate.Value;
+                    if (dPMettol.SelectedDate != null) { mettol = dPMettol.SelectedDate.Value;
+                    
                     meddig = dPMeddig.SelectedDate.Value;
                     lBHiba.Opacity = 0;
-                    Szuresek();
+                    Szuresek(); 
+                    
+                    }
                 }
 
             }

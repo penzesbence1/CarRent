@@ -200,6 +200,43 @@ namespace CarRent
 
         }
 
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button button = sender as Button;
+            button.Style = null;
+            string hexColor = "#FF0000"; 
 
+            
+            Color color = (Color)ColorConverter.ConvertFromString(hexColor);
+            SolidColorBrush brush = new SolidColorBrush(color);
+
+            // Háttérszín beállítása
+            button.Background = brush;
+            
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button button = sender as Button;
+
+            Style style = new Style(typeof(Button));
+            
+            button.MouseEnter += (sender, e) => VisualStateManager.GoToElementState(button, "Normal", true);
+
+   
+         
+
+
+            string hexColor = "#FF01266C";
+
+
+            Color color = (Color)ColorConverter.ConvertFromString(hexColor);
+            SolidColorBrush brush = new SolidColorBrush(color);
+
+            // Háttérszín beállítása
+            button.Background = brush;
+
+            
+        }
     }
 }

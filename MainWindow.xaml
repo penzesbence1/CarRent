@@ -10,7 +10,8 @@
         MinHeight="525"
         MinWidth="450" Icon="/carIcon.png"
         >
-
+   
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="61*"/>
