@@ -46,11 +46,13 @@
 
                 <Image Source="/img/bmw.png" Grid.Row="0" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
 
-                <ListView Grid.Row="0" HorizontalAlignment="Left" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}" Margin="170,44,0,44">
+                <ListView x:Name="bmwlist"  Grid.Row="0" HorizontalAlignment="Left" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}" Margin="170,44,0,44">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
                             <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
+                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
+                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
                             <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
                         </GridView>
                     </ListView.View>
@@ -58,11 +60,13 @@
 
                 <Image Source="/img/ford.png" Grid.Row="1" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
 
-                <ListView Grid.Row="1" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
+                <ListView x:Name="fordlist" Grid.Row="1" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
                             <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
+                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
+                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
                             <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
                         </GridView>
                     </ListView.View>
@@ -79,11 +83,13 @@
 
                 <Image Source="/img/volkswagen.png" Grid.Row="0" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
 
-                <ListView Grid.Row="0" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
+                <ListView x:Name="vwlist" Grid.Row="0" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
                             <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
+                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
+                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
                             <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
                         </GridView>
                     </ListView.View>
@@ -91,11 +97,13 @@
 
                 <Image Source="/img/honda.png" Grid.Row="1" HorizontalAlignment="Left" Margin="50" Height="80" VerticalAlignment="Center" Width="80" Stretch="Uniform"/>
 
-                <ListView Grid.Row="1" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
+                <ListView x:Name="hondalist" Grid.Row="1" HorizontalAlignment="Right" Width="220" Height="100" Background="Transparent" ItemsSource="{Binding Path=Autok, RelativeSource={RelativeSource AncestorType=Page}}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Modell" DisplayMemberBinding="{Binding Modell}" />
                             <GridViewColumn Header="Évjárat" DisplayMemberBinding="{Binding Evjarat}" />
+                            <GridViewColumn Header="Kedvezmény" DisplayMemberBinding="{Binding Kedvezmeny}" />
+                            <GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Ar}" />
                             <!-- További oszlopok hozzáadása, például Modell, Évjárat, stb. -->
                         </GridView>
                     </ListView.View>
