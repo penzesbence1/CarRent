@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="akcio.png" />
     <None Remove="bmw.png" />
     <None Remove="carIcon.png" />
     <None Remove="carrenticon-rbg.png" />
@@ -19,6 +20,7 @@
     <None Remove="img\ford.png" />
     <None Remove="img\honda.png" />
     <None Remove="img\volkswagen.png" />
+    <None Remove="sale.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="akcio.png" />
     <Resource Include="bmw.png" />
     <Resource Include="carIcon.png" />
     <Resource Include="carrenticon-rbg.png" />
@@ -45,6 +48,7 @@
     <Resource Include="img\volkswagen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="sale.png" />
   </ItemGroup>
 
   <ItemGroup>
