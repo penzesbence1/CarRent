@@ -73,7 +73,7 @@ namespace CarRent
             switch (Name)
             {
                 case "lbUser":
-                    Main.Content = new UserPage();
+                    Main.Content = new UserPage(activeuser);
                     break;
 
 
@@ -105,7 +105,7 @@ namespace CarRent
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Main.Content = new UserPage();
+            Main.Content = new UserPage(activeuser);
         }
 
 

@@ -115,21 +115,57 @@ namespace CarRent
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
+            Button btn = (Button)sender;
+
+
+
+
 
             Cursor = Cursors.Hand;
-
+            btn.Background = Brushes.Green;
 
 
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
+            Button btn = (Button)sender;
+            SolidColorBrush szin = (SolidColorBrush)btn.Background;
 
+            Cursor = Cursors.Arrow;
+
+           
+            // Háttérszín beállítása
+            btn.Background = Brushes.DarkGreen;
+        }
+
+
+        private void Button_MouseEnterRed(object sender, MouseEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+
+
+
+
+            Cursor = Cursors.Hand;
+            btn.Background = Brushes.Red;
+
+
+        }
+
+        private void Button_MouseLeaveRed(object sender, MouseEventArgs e)
+        {
+            Button btn = (Button)sender;
+            SolidColorBrush szin = (SolidColorBrush)btn.Background;
 
             Cursor = Cursors.Arrow;
 
 
+            // Háttérszín beállítása
+            btn.Background = Brushes.DarkRed;
         }
+
 
     }
 }

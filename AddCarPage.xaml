@@ -63,7 +63,25 @@
                 Opacity="1" Click="btMegerosit_Click"  
                     MouseEnter="Button_MouseEnter"
                     MouseLeave="Button_MouseLeave"
-                />
+                >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+
+
+
+            </Button>
 
             <Button x:Name="btMegse" Content="Mégse" HorizontalAlignment="Center"
                 Height="35" Margin="-200,-35,0,0" 
@@ -71,8 +89,26 @@
                 FontWeight="Bold" FontSize="16" Background="DarkRed"
                 Foreground="#FFE3E3E3" 
                 Opacity="1" Click="btMegse_Click"
-                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
-                    />
+                    MouseEnter="Button_MouseEnterRed" MouseLeave="Button_MouseLeaveRed"
+                    >
+
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+
+            
+            </Button>
 
         </StackPanel>
 

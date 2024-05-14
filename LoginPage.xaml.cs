@@ -206,20 +206,37 @@ namespace CarRent
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
+            Button btn = (Button)sender;
+
+
+            string hexColor = "#FF08568A"; // Itt írd be a kívánt hexadecimális színkódot
+
+            // Átalakítás SolidColorBrush objektummá
+            SolidColorBrush brush = (SolidColorBrush)(new BrushConverter().ConvertFrom(hexColor));
+
+            // Háttérszín beállítása
+            btn.Background = brush;
+            
 
             Cursor = Cursors.Hand;
+           
 
-          
-            
+
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
-
-
+            Button btn = (Button)sender;
+           
             Cursor = Cursors.Arrow;
 
-            
+            string hexColor = "#FF01266C"; // Itt írd be a kívánt hexadecimális színkódot
+
+            // Átalakítás SolidColorBrush objektummá
+            SolidColorBrush brush = (SolidColorBrush)(new BrushConverter().ConvertFrom(hexColor));
+
+            // Háttérszín beállítása
+            btn.Background = brush;
         }
     }
 }
